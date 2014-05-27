@@ -77,6 +77,15 @@ module.exports = function(grunt) {
 		},
 
 		connect: {
+      livereload: {
+        options: {
+          port: 8000,
+          hostname: 'localhost',
+          base: '.',
+          open: true,
+          livereload: true
+        }
+      },
 			server: {
 				options: {
 					port: port,
@@ -96,16 +105,22 @@ module.exports = function(grunt) {
 			]
 		},
 
-		watch: {
-			main: {
-				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
-				tasks: 'default'
-			},
-			theme: {
-				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
-				tasks: 'themes'
-			}
-		}
+    watch: {
+      livereload: {
+        options: {
+          livereload: true
+        },
+        files: [ 'index.html', 'js/*.js', 'css/*.css' ]
+      },
+      main: {
+        files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
+        tasks: 'default'
+      },
+      theme: {
+        files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
+        tasks: 'themes'
+      }
+    }
 
 	});
 
@@ -129,7 +144,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'package', [ 'default', 'zip' ] );
 
 	// Serve presentation locally
-	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	grunt.registerTask( 'serve', [ 'connect:livereload', 'watch' ] );
 
 	// Run tests
 	grunt.registerTask( 'test', [ 'jshint', 'qunit' ] );
