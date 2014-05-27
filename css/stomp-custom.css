@@ -1,0 +1,27 @@
+table.word-table {
+  width: 100%;
+}
+
+table.word-table tr {
+  line-height: 2em
+}
+
+table.word-table td {
+  width: 50%;
+}
+
+span.kword {
+  font-weight: bold;
+  color: #2aa198;
+  font-size: 120%;
+}
+
+span.akword {
+  font-weight: bold;
+  color: #d33682;
+  font-size: 120%;
+}
+
+span.subtle-text {
+  color: #93a1a1
+}
