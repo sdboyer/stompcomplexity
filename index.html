@@ -15,7 +15,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/stomp-custom.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,7 +42,172 @@
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <div class="slides">
+        <section>
+          <h1>Stomp Complexity!</h1>
+          <p><small>Sam Boyer <a href="https://twitter.com/sdboyer">@sdboyer</a></small></p>
+        </section>
+
+        <section id="thieving-flattery">
+          <p>Much of this talk is proudly purloined from Rich Hickey's <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a></p>
+          <p><small>(If you haven't seen it, you should fix that)</small></p>
+          <aside class="notes">
+          <p>a ton of this talk is lifted pretty directly from a fantastic talk given by Rich Hickey, the creator of Clojure, at Strange Loop in 2011. (but hey, it's ok, because i'm acknowledging it!)</p>
+          <p>While i did come up with the general idea for this talk before having seen Rich Hickey's talk, that talk gave fundamental shape and form to this one</p>
+          <p>but i'm going to go a different place than he did with his talk; he was focused on making an argument for functional programming. i think there's value there, and you should watch the talk, but such an argument isn't really useful for most people, who can't just switch at the drop of a hat.</p>
+          <p>i think the basic premises he outlines there are incredibly powerful. in particular, he gives us some words - both new ones, and new concepts for familiar ones - in his talk. hat's where i want to start.</p>
+          </aside>
+        </section>
+
+        <section id="etymologies">
+          <table class="word-table">
+            <tr>
+              <td><span class="kword">Simple</span></td>
+              <td><span class="kword">Easy</span></td>
+            </tr>
+            <tr>
+              <td><em>sim-plex</em></td>
+              <td><em>ese &lt; aise <span class="subtle-text fragment" data-fragment-index="1">&lt; adjacens</span></em></td>
+            </tr>
+            <tr>
+              <td>one fold, braid</td>
+              <td>lack of effort <span class="subtle-text fragment" data-fragment-index="1">(to lie near)</span></td>
+            </tr>
+            <tr>
+              <td>vs  <span class="akword">complex</span></td>
+              <td>vs  <span class="akword">difficult</span></td>
+            </tr>
+          </table>
+          <aside class="notes">
+          <p>So, in a slide that is almost exactly the same as the one from his talk, let's start by looking at the words 'simple' and 'easy'.</p>
+          <ul>
+            <li>we use these words a lot. but we'd benefit from using them more precisely. one of the great ways to do that is to look at a word's history - its etymology.</li>
+            <li>Simple, from simplus, or simplex. it quite literally means "one fold or braid." and if you picture a single braid, that just...straight. if that doesn't make sense, then think about the more familiar word "duplex."</li>
+            <li>The opposite of this is complex, as in braided together. this is a key concept in both my talk, and in Rich Hickey's - understanding what this folding looks like, and the problems with it.</li>
+            <li>Easy is a little trickier to get something good from. <em>ese</em> from Middle English, back through to the Old French <em>aise</em>. There are a lot of senses for these words, but the most relevant one here is the idea of a "lack of effort." </li>
+            <li>now, Rich found another "speculative" linkage, back to the Latin adjacens (root of adjacent). i couldn't find that linkage myself, but it serves the talk well, so i'm stealing that too. *CLICK*</li>
+            <li>this is really useful because the idea of "lying near" captures the proximity sense of "lack of effort", and that helps with the overall metaphor i'm trying to build in your mind right now.</li>
+          </ul>
+          </aside>
+        </section>
+
+        <section id="simple-as-one">
+          <h2>Simple</h2>
+          <p>Simple is often about 'oneness':</p>
+          <ul>
+            <li>One content type</li>
+            <li>One responsibility, role, goal</li>
+            <li>One concept</li>
+            <li>One axis/dimension</li>
+            <li>One set</li>
+          </ul>
+          <p class="fragment"><em>a lack of interleaving</em></p>
+          <aside class="notes">
+          <ul>
+            <li>the notion of single-ness, one-ness, unarity, is a defining characterstic. i always come back to it.</li>
+            <li>in increasing order of abstractness; </li>
+            <li>i often find myself comparing the search for simplicity as being like a pig sniffing out truffles: reasoning can help me get part of the way there, but at a certain point, i'm just following instincts; there's a feeling i get when my mind latches on to something unentangled, something truly simple.</li>
+          </ul>
+          </aside>
+        </section>
+
+        <section id="simple-as-not-one">
+          <p>But simplicity does not mean just 'having one':</p>
+          <ul>
+            <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
+            <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
+            <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
+            <li>One element in a set <span class="subtle-text"><em>(vs a thousand?)</em></span></li>
+          </ul>
+          <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
+          <aside class="notes">
+          <ul>
+            <li>however, it's perfectly possible for us to have "more than oneness" without increasing complexity</li>
+            <li>the key here is that in each of these examples, adding more of them does not increase intrinsic complexity.</li>
+            <li>this is because each of these things are increasing in cardinality - the count of a thing, not the number of types of things.</li>
+            <li>if it helps, think of this as "difference of kind" - interleaving, simplicity - versus "difference of degree" - cardinality.</li>
+          </ul>
+          </aside>
+        </section>
+
+        <section id="simple-is">
+          <p>Simplicity is <em>instrinsic and objective</em></p>
+          <aside class="notes">
+            <ul>
+              <li>most important, simplicity is objective. it is an intrinsic property of the thing itself.</li>
+              <li>it does not need a person looking at it for it to be simple.</li>
+              <li>all of that is in stark contrast to...</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section id="easy-is">
+          <h2>Easy</h2>
+          <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
+          <p class="fragment">Ease is <em>relative and subjective</em></p>
+          <aside class="notes">
+          <ul>
+            <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
+            <li>'ease' is inherently subjective. and we are OBSESSED with it - as software engineers, and maybe even as humans in general.</li>
+          </ul>
+          </aside>
+        </section>
+
+        <section id="easy-qualities">
+          <h3>Easy: "Nearness"</h3>
+          <ul>
+            <li>In our tooling:
+            <ul>
+              <li>WYSIWYG</li>
+              <li>Drag-n-drop</li>
+              <li>'Make a drush command'</li>
+              <li>Devel module</li>
+              <li>Package managers</li>
+            </ul></li>
+            <li>Close to our existing skills and knowledge</li>
+            <li>Minimal effort required for understanding/mastery</li>
+          </ul>
+          <aside class="notes">
+            <ul>
+              <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
+              <li>Drag-n-drop configuration: in simple cases like linear sorting, it can map easily.</li>
+              <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
+              <li>Devel module: here, "ease" is all about locating tools in a single place</li>
+              <li>drush: it's an oversized swiss army knife, with lots of things all bunched together. maybe not drush's fault, per se, but what if you want to design something that works with Drupal without being susceptible to errors in its codebase?</li>
+            </ul>
+            <p>ultimately we're talking about a specific group of people, and the knowledge/experience we <em>think</em> they have. and we want to minimize the effort involved in picking up a new thing.</p>
+            <p>this is FUNDAMENTALLY DIFFERENT from talking about the intrinsic simplicity of a thing.</p>
+          </aside>
+        </section>
+
+        <section id="simple-vs-easy">
+          <p>(sum up and compare simple vs. easy here)</p>
+        </section>
+
+        <section id="construct-vs-artifact">
+          <h2>The Thing vs working with The Thing</h2>
+          <ul>
+            <li></li>
+          </ul>
+        </section>
+
+        <section id="priorities">
+          <h3>Both Simple and Easy are important (and difficult)</h3>
+          <p>But, without a deliberate hand, 'easy' gets all the attention.</p>
+        </section>
+
+        <section id="pascal">
+          <blockquote>
+            I have only made this letter longer because I have not had the time to make it shorter.
+          </blockquote>
+          <p>Blaise Pascal (Letter 16, 1657)</p>
+        </section>
+
+        <section id="when-they-matter">
+          <h2>It's about time</h2>
+          <p><span class="kword">Easy</span> only matters up .</p>
+        </section>
+
 				<section>
 					<h1>Reveal.js</h1>
 					<h3>HTML Presentations Made Easy</h3>
@@ -365,13 +531,16 @@ function linkify( selector ) {
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
+				controls: false,
 				progress: true,
 				history: true,
-				center: true,
+        center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        width: 1280,
+        height: 800,
+
+				theme: 'solarized', // available themes are in /css/theme
+				transition: 'none', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
