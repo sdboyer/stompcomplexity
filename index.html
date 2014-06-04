@@ -253,11 +253,6 @@
             </aside>
           </section>
 
-          <section id="to-and-fro">
-            <h3>Simple things can generally be made easy</h3><br/>
-            <h3>The reverse does not hold</h3>
-          </section>
-
           <section id="priorities">
             <h3>Simple and Easy are both important (and difficult)</h3>
             <p>Easy gets the attention by default. Simple requires conscious effort.</p><br/>
@@ -272,6 +267,11 @@
                 <li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
               </ul>
             </aside>
+          </section>
+
+          <section id="to-and-fro">
+            <h3>Simple things can generally be made easy</h3><br/>
+            <h3>The reverse does not hold</h3>
           </section>
 
           <section id="velocity-graph">
@@ -393,6 +393,7 @@
                 <li>Dependency Inversion</li>
               </ul></li>
               <li>"The Unix Philosophy"</li>
+              <li>DRY - a red herring?</li>
             </ul>
             <aside class="notes">
               <ul>
@@ -404,6 +405,7 @@
                 </ul>
                 </li>
                 <li>Unix - small pieces, loosely coupled</li>
+                <li>DRY, though, is tricky. sometimes, simple is more verbose than easy. often, in fact. trying to reuse code can easily result in you complecting two things together</li>
               </ul>
             </aside>
           </section>
@@ -508,7 +510,8 @@ interface EntityInterface {
             <h3>Complected Layers</h3>
             <ul>
               <li>Config is its own, discrete system</li>
-              <li>Config Entities ought to be able to </li>
+              <li>Config Entities should sit atop them transparently...</li>
+              <li>But config import has to reach into the entity system</li>
             </ul>
           </section>
 
@@ -572,13 +575,24 @@ interface EntityInterface {
               <li>Answers: "is the system correct after this collaboration (hook)?"</li>
             </ul>
           </section>
+
+          <section id="simplification">
+            <h2>Simplification</h2>
+            <ul>
+              <li>Harder to point ot a particular thing</li>
+              <li></li>
+            </ul>
+          </section>
         </section>
 
         <section>
+          <section id="learning-curve">
+            <h2>The Learning Curve</h2>
+            <img src="img/learning-curve.jpg" alt="The (original) Drupal learning curve"/>
+          </section>
           <section id="the-final-frontier">
             <h2>Gauntlet, Thrown</h2>
-            <img src="img/learning-curve.jpg" alt="The (original) Drupal learning curve"/>
-            <p>In my eyes, the highest point on there is </p>
+            <img src="img/learning-curve-new.jpg" alt="The new Drupal learning curve"/>
             <aside class="notes">
               <p>this is the final frontier that one can reach as a Drupaller. (almost) no new features - just refining, decomplecting, simplifying.</p>
             </aside>
