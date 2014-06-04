@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Stomp Complexity!</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Simple, Easy, and Drupal (adapted from Rich Hickey)">
+		<meta name="author" content="Sam Boyer">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -218,7 +218,8 @@
             <p>Problem with the metaphor is that in a braid, we can still see individual strands. In a complex system, we typically cannot identify the original constituent pieces.</p>
             </aside>
           </section>
-
+        </section>
+        <section>
           <section id="dijkstra-prerequisite">
             <blockquote>
               Simplicity is prerequisite for reliability.
@@ -384,7 +385,6 @@
             </aside>
           </section>
 
-
           <section id="related-concepts">
             <h3>Simplicity: the common thread</h3>
             <ul>
@@ -410,7 +410,7 @@
         </section>
 
         <section>
-          <section id="complexity-drupal">
+          <section id="complexity-drupal" data-background="img/tendril.jpg">
             <h2>Complexity in Drupal</h2>
             <aside class="notes">
             <ul>
@@ -459,14 +459,6 @@
             </aside>
           </section>
 
-          <section id="simpletest">
-            <h2>Simpletest</h2>
-            <ul>
-              <li>system itself is complected with it - check for it right at beginning of bootstrap</li>
-              <li>complects logic with other, irrelevant logic</li>
-            </ul>
-          </section>
-
           <section id="config-entities">
             <h2>Config Entities</h2>
             <ul>
@@ -485,7 +477,7 @@
             </aside>
           </section>
 
-          <section id="config-entities-2">
+          <section id="config-entities-interfaces">
             <h3>Complected Interfaces</h3>
             <pre><code data-trim>
 abstract class ConfigEntityBase extends Entity implements ConfigEntityInterface {};
@@ -510,6 +502,14 @@ interface EntityInterface {
               <li>url() is optional. whether or not its used, and much of these specific behaviors, are controlled by the entity info...which is </li>
             </ul>
             </aside>
+          </section>
+
+          <section id="config-entities-layers">
+            <h3>Complected Layers</h3>
+            <ul>
+              <li>Config is its own, discrete system</li>
+              <li>Config Entities ought to be able to </li>
+            </ul>
           </section>
 
           <section id="panels">
@@ -577,10 +577,16 @@ interface EntityInterface {
         <section>
           <section id="the-final-frontier">
             <h2>Gauntlet, Thrown</h2>
-            <p>(find image of drupal learning curve; modify to have the final level be, "i decomplect/simplify Drupal")</p>
+            <img src="img/learning-curve.jpg" alt="The (original) Drupal learning curve"/>
+            <p>In my eyes, the highest point on there is </p>
             <aside class="notes">
               <p>this is the final frontier that one can reach as a Drupaller. (almost) no new features - just refining, decomplecting, simplifying.</p>
             </aside>
+          </section>
+
+          <section id="fin">
+            <h2>Thank You</h2>
+            <p><a href="http://sdboyer.github.io/stompcomplexity/#/" >http://sdboyer.github.io/stompcomplexity/</a></p>
           </section>
         </section>
 			</div>
