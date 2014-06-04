@@ -1,13 +1,22 @@
 table.word-table {
-  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  left: 3em;
+  /*width: 100%;*/
 }
 
 table.word-table tr {
-  line-height: 2em
+  line-height: 2em;
 }
 
 table.word-table td {
-  width: 50%;
+  /*width: 50%;*/
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+table.word-table td:nth-of-type(even) {
+  padding-left: 4em;
 }
 
 span.kword {
@@ -47,6 +56,11 @@ div.quotee {
 .gr-small {
   width: 38.1953028%;
   float: right;
+}
+
+.half {
+  width: 50%;
+  float: left;
 }
 
 #braiding img {
