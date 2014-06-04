@@ -83,3 +83,9 @@ div.quotee {
 .reveal blockquote footer {
   font-size: .75em;
 }
+
+.reveal ul,
+.reveal ol {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
