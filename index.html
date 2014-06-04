@@ -60,7 +60,7 @@
             <li>Powerful new metaphors for thinking about Drupal, but systems in general</li>
             <li>A glimmering that Drupal's complexity can be mitigated</li>
             <li>That doing so is <em>paramount</em> to the health of the project</li>
-            <li>And that confronting complexity is (arguably) Drupal's highest calling</li>
+            <li>And that reducing complexity is Drupal's highest calling</li>
           </ul>
           <aside class="notes">
             <ul>
@@ -120,7 +120,7 @@
           <section id="easy-is">
             <h2>Easy</h2>
             <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
-            <p class="fragment"><em>relative, performative</em></p>
+            <p class="fragment"><em>relative, subjective</em></p>
             <aside class="notes">
             <ul>
               <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
@@ -135,7 +135,6 @@
               <li>In our tooling:
               <ul>
                 <li>WYSIWYG</li>
-                <li>Drag-n-drop</li>
                 <li>Devel module</li>
                 <li>Package managers</li>
               </ul></li>
@@ -145,7 +144,6 @@
             <aside class="notes">
               <ul>
                 <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
-                <li>Drag-n-drop configuration: in simple cases like linear sorting, it can map easily.</li>
                 <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
                 <li>Devel module: here, "ease" is all about locating tools in a single place</li>
               </ul>
@@ -163,7 +161,6 @@
               <li>One responsibility, role, goal</li>
               <li>One concept</li>
               <li>One axis/dimension</li>
-              <li>One set</li>
             </ul>
             <p class="fragment"><em>a lack of interleaving</em></p>
             <aside class="notes">
@@ -181,7 +178,6 @@
               <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
               <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
               <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
-              <li>One element in a set <span class="subtle-text"><em>(vs a thousand?)</em></span></li>
             </ul>
             <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
             <aside class="notes">
@@ -203,6 +199,23 @@
                 <li>all of that is in stark contrast to ease. Ease goes away over time; simplicity/complexity never does.</li>
               </ul>
               <p>OK - why is it so important we define these things?</p>
+            </aside>
+          </section>
+
+          <section id="braiding">
+            <h2>Complexity as Braiding</h2>
+            <div>
+            <ul>
+              <li><span class="akword">complect</span> - "to braid together, make complex"</li>
+              <li><span class="kword">decomplect</span> - "to unbraid, tease apart"</li>
+            </ul>
+            <p><br/><em>constrast with:</em> <span class="kword">compose</span>, "to place together"</p>
+            </div>
+            <img src="img/vert-braid.jpg" alt=""/>
+            <aside class="notes">
+            <p>OK, just a little bit more of definitions. first, a metaphor</p>
+            <p>I really like the braiding idea as a way of describing complexity. By twisting separate things together, we create artfiacts in which it is impossible to deal separately with the individual pieces.</p>
+            <p>Problem with the metaphor is that in a braid, we can still see individual strands. In a complex system, we typically cannot identify the original constituent pieces.</p>
             </aside>
           </section>
 
@@ -346,9 +359,9 @@
             </aside>
           </section>
 
-          <section id="replication-innovation">
+          <section id="replication-transformation">
             <p>Easy enables <strong>Replication</strong></p>
-            <p>Simple enables <strong>Innovation</strong></p>
+            <p>Simple enables <strong>Transformation</strong></p>
           </section>
 
           <section id="hoare-two-ways">
@@ -368,25 +381,6 @@
             </ul>
             <!--<p>Better quote: Programming languages on the whole are very much more complicated than they used to be: object orientation, inheritance, and other features are still not really being thought through from the point of view of a coherent and scientifically well-based discipline or a theory of correctness. My original postulate, which I have been pursuing as a scientist all my life, is that one uses the criteria of correctness as a means of converging on a decent programming language design—one which doesn’t set traps for its users, and ones in which the different components of the program correspond clearly to different components of its specification, so you can reason compositionally about it.</p>-->
             <!--<p>The Pascal quote is more subtle. it reminds us that achieving simplicity is not easy.</p>-->
-            </aside>
-          </section>
-
-          <section id="complexity-braiding">
-            <h2>Complexity as Braiding</h2>
-            <img src="img/3d4b.jpg" alt=""/>
-            <aside class="notes">
-            <p>OK, just a little bit more of definitions. first, a metaphor</p>
-            <p>I really like the braiding idea as a way of describing complexity. By twisting separate things together, we create artfiacts in which it is impossible to deal separately with the individual pieces.</p>
-            <p>Problem with the metaphor is that in a braid, we can still see individual strands. In a complex system, we typically cannot identify the original constituent pieces.</p>
-            </aside>
-          </section>
-
-          <section id="complect">
-            <h2>"Complect"</h2>
-            <p><em>archaic:</em> to braid together ("to make complex")</p>
-            <p>decomplect, "to unbraid, tease apart."</p>
-            <aside>
-              
             </aside>
           </section>
 
@@ -429,6 +423,28 @@
             </aside>
           </section>
 
+          <section id="global-variables">
+            <h2>Global Variables</h2>
+            <ul>
+              <li>Complects your code with ALL other code in your PHP process</li>
+              <li>Somewhat less risky because failures tend to be obvious</li>
+              <li>But, they're hell for testing</li>
+              <li>Also just <em>wicked</em> easy</li>
+            </ul>
+            <aside class="notes">
+
+            </aside>
+          </section>
+          <section id="global-variables-state">
+            <h3>State</h3>
+            <ul>
+              <li>Global vars are a more general problem of state</li>
+              <li>Complects value with time</li>
+              <li>Weaves into everything that touches it</li>
+              <li>Cannot be mitigated by modularization</li>
+            </ul>
+          </section>
+
           <section id="stop-saying-this">
             <h3>"It works, as long as no one does something stupid."</h3>
             <p class="fragment"><small>OMG, STOP SAYING THIS</small></p>
@@ -437,41 +453,18 @@
                 <li>i hear this ALL THE TIME from Drupal folks. hell, i say it all the time. it's one of a litany of rationalizations we give for not designing tight systems.</li>
                 <li>in my view, it's a product of many factors - the fear that someone might have a use case we can't support, and the </li>
                 <li>there's also a deeper issue here: "it works" is not a good criteria. in fact, it's a terrible criteria.</li>
+                <li>this is ALWAYS possible. we need to shift the level, though. "tried to run it on a plate of spaghetti instead of a computer" vs. "gave the value 12, but the undocumented reality is that everything blows up if the value is greater than 10"</li>
+                <li>also - "it works" is not a design philosophy. it is something you accept - not something you aspire to.</li>
               </ul>
             </aside>
           </section>
 
-          <section id="global-variables">
-            <h2>Global Variables</h2>
+          <section id="simpletest">
+            <h2>Simpletest</h2>
             <ul>
-              <li>Complects your code with ALL other code in your PHP process</li>
-              <li>Somewhat less risky because failures tend to be obvious</li>
-              <li>But, they're hell for testing</li>
+              <li>system itself is complected with it - check for it right at beginning of bootstrap</li>
+              <li>complects logic with other, irrelevant logic</li>
             </ul>
-            <aside class="notes">
-
-            </aside>
-          </section>
-          <section id="global-variables-state">
-            <h2>Global Variables: State</h2>
-            <ul>
-              <li>Global vars are a more general problem of state</li>
-              <li>Complects value with time</li>
-              <li>Weaves into everything that touches it</li>
-              <li>Cannot be mitigated by modularization</li>
-              <li>Also just <em>wicked</em> easy</li>
-            </ul>
-          </section>
-          <section id="multisite">
-            <h2>Multisite</h2>
-            <ul>
-              <li>Complects sites together</li>
-              <li>Trades simple for easy, quite explicitly</li>
-              <li>ONE MORE</li>
-            </ul>
-            <aside class="notes">
-              
-            </aside>
           </section>
 
           <section id="config-entities">
@@ -480,13 +473,6 @@
               <li>Complects Config, Entities, and Plugins</li>
               <li>This is not necessarily (all) bad</li>
             </ul>
-            <pre><code data-trim>
-abstract class ConfigEntityBase extends Entity implements ConfigEntityInterface {};
-interface ConfigEntityInterface extends EntityInterface {};
-
-class EntityManager extends DefaultPluginManager implements EntityManagerInterface {};
-interface EntityManagerInterface extends PluginManagerInterface {};
-          </code></pre>
             <aside class="notes">
             <ul>
               <li>some definitions first <ul>
@@ -498,35 +484,92 @@ interface EntityManagerInterface extends PluginManagerInterface {};
             </ul>
             </aside>
           </section>
+
+          <section id="config-entities-2">
+            <h3>Complected Interfaces</h3>
+            <pre><code data-trim>
+abstract class ConfigEntityBase extends Entity implements ConfigEntityInterface {};
+interface ConfigEntityInterface extends EntityInterface {};
+
+class EntityManager extends DefaultPluginManager implements EntityManagerInterface {};
+interface EntityManagerInterface extends PluginManagerInterface {};
+
+interface EntityInterface {
+  public function bundle(); // irrelevant
+  public function url(); // optional
+}
+          </code></pre>
+            <ul>
+              <li><code>bundle()</code> is for fields - irrelevant for config</li>
+              <li><code>url()</code> assumes exactly one config UI.</li>
+            </ul>
+            <aside class="notes">
+            <ul>
+              <li>bundle() is for fieldable entities. this is dangerous, because CONFIG SHOULD NOT BE FIELDABLE. they are two separate domains. bringing them anywhere near each other makes things messy.</li>
+              <li>note that i'm not saying it wouldn't be *convenient* to put fields on a particular bastardized config entity - i'm saying that it's incorrect. it would become another dimension one has to consider when working in the domain of config</li>
+              <li>url() is optional. whether or not its used, and much of these specific behaviors, are controlled by the entity info...which is </li>
+            </ul>
+            </aside>
+          </section>
+
           <section id="panels">
             <h2>Panels</h2>
             <ul>
-              <li>That's right, i'mma rip myself a new one</li>
+              <li>Complects IA with presentation...incorrectly!</li>
+              <li>Internally, more composed than complected</li>
+              <li>But it has never been "made easy"</li>
+              <li>Interface requires knowledge, rather than imparting it</li>
+              <li>Internals are complected with configuration (UIs)</li>
             </ul>
+            <aside class="notes">
+              <ul>
+                <li>presentation with IA: Panels' sense of a standalone display object is bound to information architecture incorrectly. </li>
+                <li>it takes a "share nothing" approach. but this is an incorrect modeling of the domain - sites are composed of shared elements</li>
+              </ul>
+            </aside>
           </section>
           <section id="alter-hooks">
             <h2>Alter Hooks</h2>
             <ul>
               <li>Complects logic through shared state</li>
+              <li>Traditionally, an "escape hatch"</li>
+              <li>In practice, often amounts to "runtime configuration"</li>
+              <li>Wreaks havoc on artifact stability</li>
             </ul>
           </section>
         </section>
 
         <section id="solutions">
-          <h2>What's the fix?</h2>
+          <h2>Solutions</h2>
           <ul>
-            <li>Decomplect: tease apart complex artifacts</li>
-            <li>Simplify: make new, less complex artifacts</li>
+            <li><span class="kword">Decomplect</span>: tease apart complex artifacts</li>
+            <li><span class="kword">Simplify</span>: make new, simpler artifacts</li>
           </ul>
+          <aside class="notes">
+          <ul>
+            <li>define em both</li>
+            <li>simplifying can be harder, especially from contrib.</li>
+            <li>but it can be well-served by a mentality we often discourage: build a small demesne, and defend the borders fiercely. ONLY LET PEOPLE IN THROUGH THE FRONT DOOR.</li>
+          </ul>
+          </aside>
         </section>
 
         <section>
           <section id="decomplect-hookalyzer">
-            <h2>Hooks, Alters, Hookalyzer</h2>
+            <h2>Hookalyzer: decomplects alters</h2>
             <ul>
+              <li><a href="https://drupal.org/project/hookalyzer">drupal.org/project/hookalyzer</a></li>
               <li>Hooks, especially alters, are strong complectors in Drupal</li>
               <li>So, tease them apart!</li>
-              <li>Hookalyzer inspects alter hook data as it goes by, dumping the diff on each pass</li>
+              <li>Hookalyzer inspects alter data as it goes by, recording a diff for each pass</li>
+            </ul>
+          </section>
+          <section id="decomplect-collab-testing">
+            <h2>Collaboration Testing</h2>
+            <ul>
+              <li><a href="https://github.com/sdboyer/collaboration_test" >github.com/sdboyer/collaboration_test</a></li>
+              <li>Again, the hook system</li>
+              <li>Answers: "is the system correct after this collaboration (hook)?"</li>
             </ul>
           </section>
         </section>
