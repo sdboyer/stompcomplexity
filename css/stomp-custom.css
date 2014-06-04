@@ -35,6 +35,9 @@ div.quotee {
   font-size: 80%;
 }
 
+/**
+  * Sam Styling
+**/
 
 .gr-large {
   width: 61.8046972%;
@@ -48,4 +51,21 @@ div.quotee {
 
 #braiding img {
   margin-top: 0;
+}
+
+.reveal blockquote {
+  background: none;
+  text-align: right;
+  box-shadow: none;
+  border-right: .075em solid;
+  padding-right: .75em;
+  font-style: italic;
+}
+
+.reveal blockquote strong {
+  text-decoration: underline;
+}
+
+.reveal blockquote footer {
+  font-size: .75em;
 }
