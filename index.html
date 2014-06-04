@@ -16,10 +16,14 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/stomp-custom.css">
+		<link rel="stylesheet" href="css/xkcd.css">
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <script src="js/d3v2.js" type="text/javascript"></script>
+    <script src="js/xkcd.js" type="text/javascript"></script>
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -48,6 +52,26 @@
           <p><small>Sam Boyer <a href="https://twitter.com/sdboyer">@sdboyer</a></small></p>
         </section>
 
+        <section id="goals">
+          <h3>This is a rather heady talk</h3>
+          <p>Some things I hope you'll come away with:</p>
+          <ul>
+            <li>New words, and new ideas about familiar words</li>
+            <li>Powerful new metaphors for thinking about Drupal, but systems in general</li>
+            <li>A glimmering that Drupal's complexity can be mitigated</li>
+            <li>That doing so is <em>paramount</em> to the health of the project</li>
+            <li>And that confronting complexity is (arguably) Drupal's highest calling</li>
+          </ul>
+          <aside class="notes">
+            <ul>
+              <li>So this talk is a little out there. But I'm really glad y'all are here. In all the Drupal talks I've given over the years, i think this is far and away the most important one.</li>
+              <li>(run through the items)</li>
+              <li>Honestly, this talk is about what's killing Drupal. Prominent community members have left because of the basic issues that we'll be discussing.</li>
+              <li>In other words, this is my take on what's killing Drupal.</li>
+            </ul>
+          </aside>
+        </section>
+
         <section id="thieving-flattery">
           <p>Much of this talk is proudly purloined from Rich Hickey's <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a></p>
           <p><small>(If you haven't seen it, you should fix that)</small></p>
@@ -59,466 +83,463 @@
           </aside>
         </section>
 
-        <section id="etymologies">
-          <table class="word-table">
-            <tr>
-              <td><span class="kword">Simple</span></td>
-              <td><span class="kword">Easy</span></td>
-            </tr>
-            <tr>
-              <td><em>sim-plex</em></td>
-              <td><em>ese &lt; aise <span class="subtle-text fragment" data-fragment-index="1">&lt; adjacens</span></em></td>
-            </tr>
-            <tr>
-              <td>one fold, braid</td>
-              <td>lack of effort <span class="subtle-text fragment" data-fragment-index="1">(to lie near)</span></td>
-            </tr>
-            <tr>
-              <td>vs  <span class="akword">complex</span></td>
-              <td>vs  <span class="akword">difficult</span></td>
-            </tr>
-          </table>
-          <aside class="notes">
-          <p>So, in a slide that is almost exactly the same as the one from his talk, let's start by looking at the words 'simple' and 'easy'.</p>
-          <ul>
-            <li>we use these words a lot. but we'd benefit from using them more precisely. one of the great ways to do that is to look at a word's history - its etymology.</li>
-            <li>Simple, from simplus, or simplex. it quite literally means "one fold or braid." and if you picture a single braid, that just...straight. if that doesn't make sense, then think about the more familiar word "duplex."</li>
-            <li>The opposite of this is complex, as in braided together. this is a key concept in both my talk, and in Rich Hickey's - understanding what this folding looks like, and the problems with it.</li>
-            <li>Easy is a little trickier to get something good from. <em>ese</em> from Middle English, back through to the Old French <em>aise</em>. There are a lot of senses for these words, but the most relevant one here is the idea of a "lack of effort." </li>
-            <li>now, Rich found another "speculative" linkage, back to the Latin adjacens (root of adjacent). i couldn't find that linkage myself, but it serves the talk well, so i'm stealing that too. *CLICK*</li>
-            <li>this is really useful because the idea of "lying near" captures the proximity sense of "lack of effort", and that helps with the overall metaphor i'm trying to build in your mind right now.</li>
-          </ul>
-          </aside>
-        </section>
-
-        <section id="simple-as-one">
-          <h2>Simple</h2>
-          <p>Simple is often about 'oneness':</p>
-          <ul>
-            <li>One content type</li>
-            <li>One responsibility, role, goal</li>
-            <li>One concept</li>
-            <li>One axis/dimension</li>
-            <li>One set</li>
-          </ul>
-          <p class="fragment"><em>a lack of interleaving</em></p>
-          <aside class="notes">
-          <ul>
-            <li>the notion of single-ness, one-ness, unarity, is a defining characterstic. i always come back to it.</li>
-            <li>in increasing order of abstractness; </li>
-            <li>i often find myself comparing the search for simplicity as being like a pig sniffing out truffles: reasoning can help me get part of the way there, but at a certain point, i'm just following instincts; there's a feeling i get when my mind latches on to something unentangled, something truly simple.</li>
-          </ul>
-          </aside>
-        </section>
-
-        <section id="simple-as-not-one">
-          <p>But simplicity does not mean just 'having one':</p>
-          <ul>
-            <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
-            <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
-            <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
-            <li>One element in a set <span class="subtle-text"><em>(vs a thousand?)</em></span></li>
-          </ul>
-          <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
-          <aside class="notes">
-          <ul>
-            <li>however, it's perfectly possible for us to have "more than oneness" without increasing complexity</li>
-            <li>the key here is that in each of these examples, adding more of them does not increase intrinsic complexity.</li>
-            <li>this is because each of these things are increasing in cardinality - the count of a thing, not the number of types of things.</li>
-            <li>if it helps, think of this as "difference of kind" - interleaving, simplicity - versus "difference of degree" - cardinality.</li>
-          </ul>
-          </aside>
-        </section>
-
-        <section id="simple-is">
-          <p>Simplicity is <em>instrinsic and objective</em></p>
-          <aside class="notes">
+        <section>
+          <section id="etymologies">
+            <h2>Some Etymology</h2>
+            <table class="word-table">
+              <tr>
+                <td><span class="kword">Simple</span></td>
+                <td><span class="kword">Easy</span></td>
+              </tr>
+              <tr>
+                <td><em>sim-plex</em></td>
+                <td><em>ese &lt; aise <span class="subtle-text fragment" data-fragment-index="1">&lt; adjacens</span></em></td>
+              </tr>
+              <tr>
+                <td>one fold, braid</td>
+                <td>lack of effort <span class="subtle-text fragment" data-fragment-index="1">(to lie near)</span></td>
+              </tr>
+              <tr>
+                <td>vs  <span class="akword">complex</span></td>
+                <td>vs  <span class="akword">difficult</span></td>
+              </tr>
+            </table>
+            <aside class="notes">
+            <p>So, in a slide that is almost exactly the same as the one from his talk, let's start by looking at the words 'simple' and 'easy'.</p>
             <ul>
-              <li>most important, simplicity is objective. it is an intrinsic property of the thing itself.</li>
-              <li>it does not need a person looking at it for it to be simple.</li>
-              <li>all of that is in stark contrast to...</li>
+              <li>we use these words a lot. but we'd benefit from using them more precisely. one of the great ways to do that is to look at a word's history - its etymology.</li>
+              <li>Simple, from simplus, or simplex. it quite literally means "one fold or braid." and if you picture a single braid, that just...straight. if that doesn't make sense, then think about the more familiar word "duplex."</li>
+              <li>The opposite of this is complex, as in braided together. this is a key concept in both my talk, and in Rich Hickey's - understanding what this folding looks like, and the problems with it.</li>
+              <li>Easy is a little trickier to get something good from. <em>ese</em> from Middle English, back through to the Old French <em>aise</em>. There are a lot of senses for these words, but the most relevant one here is the idea of a "lack of effort." </li>
+              <li>now, Rich found another "speculative" linkage, back to the Latin adjacens (root of adjacent). i couldn't find that linkage myself, but it serves the talk well, so i'm stealing that too. *CLICK*</li>
+              <li>this is really useful because the idea of "lying near" captures the proximity sense of "lack of effort", and that helps with the overall metaphor i'm trying to build in your mind right now.</li>
             </ul>
-          </aside>
-        </section>
+            </aside>
+          </section>
 
-        <section id="easy-is">
-          <h2>Easy</h2>
-          <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
-          <p class="fragment">Ease is <em>relative and subjective</em></p>
-          <aside class="notes">
-          <ul>
-            <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
-            <li>'ease' is inherently subjective. and we are OBSESSED with it - as software engineers, and maybe even as humans in general.</li>
-          </ul>
-          </aside>
-        </section>
-
-        <section id="easy-qualities">
-          <h3>Easy: "Nearness"</h3>
-          <ul>
-            <li>In our tooling:
+          <section id="easy-is">
+            <h2>Easy</h2>
+            <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
+            <p class="fragment"><em>relative, performative</em></p>
+            <aside class="notes">
             <ul>
-              <li>WYSIWYG</li>
-              <li>Drag-n-drop</li>
-              <li>'Make a drush command'</li>
-              <li>Devel module</li>
-              <li>Package managers</li>
-            </ul></li>
-            <li>Close to our existing skills and knowledge</li>
-            <li>Minimal effort required for understanding/mastery</li>
-          </ul>
-          <aside class="notes">
-            <ul>
-              <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
-              <li>Drag-n-drop configuration: in simple cases like linear sorting, it can map easily.</li>
-              <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
-              <li>Devel module: here, "ease" is all about locating tools in a single place</li>
-              <li>drush: it's an oversized swiss army knife, with lots of things all bunched together. maybe not drush's fault, per se, but what if you want to design something that works with Drupal without being susceptible to errors in its codebase?</li>
+              <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
+              <li>'ease' is inherently subjective. and we are OBSESSED with it - as software engineers, and maybe even as humans in general.</li>
             </ul>
-            <p>ultimately we're talking about a specific group of people, and the knowledge/experience we <em>think</em> they have. and we want to minimize the effort involved in picking up a new thing.</p>
-            <p>this is FUNDAMENTALLY DIFFERENT from talking about the intrinsic simplicity of a thing.</p>
-          </aside>
+            </aside>
+          </section>
+
+          <section id="easy-qualities">
+            <h3>Easy: "Near, Effortless"</h3>
+            <ul>
+              <li>In our tooling:
+              <ul>
+                <li>WYSIWYG</li>
+                <li>Drag-n-drop</li>
+                <li>Devel module</li>
+                <li>Package managers</li>
+              </ul></li>
+              <li>Close to our existing skills and knowledge</li>
+              <li>Minimal effort required for understanding/mastery</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
+                <li>Drag-n-drop configuration: in simple cases like linear sorting, it can map easily.</li>
+                <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
+                <li>Devel module: here, "ease" is all about locating tools in a single place</li>
+              </ul>
+              <p>ultimately we're talking about a specific group of people, and the knowledge/experience we <em>think</em> they have. and we want to minimize the effort for them to pick up a new thing.</p>
+              <p>this is FUNDAMENTALLY DIFFERENT from talking about the intrinsic simplicity of a thing. (it's also one way to build an island, btw)</p>
+              <p>playing the violin is not EASY for me, but it may be EASY for many of you. or, one better - reading Braille.</p>
+            </aside>
+          </section>
+
+          <section id="simple-as-one">
+            <h2>Simple</h2>
+            <p>Simple is often about 'oneness':</p>
+            <ul>
+              <li>One content type</li>
+              <li>One responsibility, role, goal</li>
+              <li>One concept</li>
+              <li>One axis/dimension</li>
+              <li>One set</li>
+            </ul>
+            <p class="fragment"><em>a lack of interleaving</em></p>
+            <aside class="notes">
+            <ul>
+              <li>the notion of single-ness, one-ness, unarity, is a defining characterstic. i always come back to it.</li>
+              <li>simplicity is not always clear</li>
+              <li>i often find myself comparing the search for simplicity as being like a pig sniffing out truffles: reasoning can help me get part of the way there, but at a certain point, i'm just following instincts; there's a feeling i get when my mind latches on to something unentangled, something truly simple.</li>
+            </ul>
+            </aside>
+          </section>
+
+          <section id="simple-as-not-one">
+            <p>But simplicity does not mean just 'having one':</p>
+            <ul>
+              <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
+              <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
+              <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
+              <li>One element in a set <span class="subtle-text"><em>(vs a thousand?)</em></span></li>
+            </ul>
+            <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
+            <aside class="notes">
+            <ul>
+              <li>however, it's perfectly possible for us to have "more than oneness" without increasing complexity</li>
+              <li>the key here is that in each of these examples, adding more of them does not increase intrinsic complexity.</li>
+              <li>this is because each of these things are increasing in cardinality - the count of a thing, not the number of types of things.</li>
+              <li>if it helps, think of this as "difference of kind" - interleaving, simplicity - versus "difference of degree" - cardinality.</li>
+            </ul>
+            </aside>
+          </section>
+
+          <section id="simple-is">
+            <p>Simple is <em>instrinsic and objective</em></p>
+            <aside class="notes">
+              <ul>
+                <li>most important, simplicity is objective. it is an intrinsic property of the thing itself.</li>
+                <li>it does not need a person looking at it for it to be simple.</li>
+                <li>all of that is in stark contrast to ease. Ease goes away over time; simplicity/complexity never does.</li>
+              </ul>
+              <p>OK - why is it so important we define these things?</p>
+            </aside>
+          </section>
+
+          <section id="dijkstra-prerequisite">
+            <blockquote>
+              Simplicity is prerequisite for reliability.
+            </blockquote>
+            <div class="quotee">Edsger W. Dijkstra</div>
+            <aside class="notes">
+            <ul>
+              <li>the great Dutch compsci Dijkstra</li>
+              <li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
+              <li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
+            </ul>
+            </aside>
+          </section>
+
+          <section id="complexity-vs-reasoning">
+            <h2>Complexity vs. Reasoning</h2>
+            <ul>
+              <li>Modifying a system requires the ability to reason about it</li>
+              <li>Complexity is the primary limitation on our ability to reason</li>
+              <li>Our ability to create complexity exceeds our capacity to reason about it</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Reasoning is the chief thing that matters when it comes to working with a system. If we can't reason about it, we can accomplish only the most rudimentary of tasks.</li>
+                <li>The complexity of a system - the number of interleaved, independent parts - is really what determines our ability to reason about a system. (use hawk story here; maybe find another)</li>
+                <li>"exceeds" is a massive understatement. our ability to create complexity is unbounded. our ability to reason about it is VERY bounded. diffrential human capabilities in reasoning are insignificant in the face of the complexity we can create</li>
+                <li>Bill, Jamal, Pooja</li>
+                <li>there is a rather obvious conclusion here: if you don't build for simplicity, your system will not scale well into complex requirements/over time, and you will leave the humans that use it grasping at straws</li>
+                <li>there's also an axiom to be had: braiding is a good metaphor, but a more practical question to ask yourself is, "how will this change i make impact peoples' ability to reason about the system?"</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section id="to-and-fro">
+            <h3>Simple things can generally be made easy</h3><br/>
+            <h3>The reverse does not hold</h3>
+          </section>
+
+          <section id="priorities">
+            <h3>Simple and Easy are both important (and difficult)</h3>
+            <p>Easy gets the attention by default. Simple requires conscious effort.</p><br/>
+            <p><em>Crucial question: </em>is this acceptable complexity?</p>
+            <aside class="notes">
+              <ul>
+                <li>this talk is worth giving because our collective tendency - especially in Drupal - is to tend towards ease. </li>
+                <li>Dijkstra again: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."</li>
+                <li>nevertheless, both of them are important. you can build the most elegant, simple system ever, but that does not guarantee it will be easy - and if nobody can get over the hump of learning it, does your system matter?</li>
+                <li>this is why we must ask the crucial question - whether the complexity is acceptable.</li>
+                <li>because complexity, once introduced, never goes away, whereas easy fades. complexity is carried into EVERY system that builds on yours. don't forget, it's intrinsic!</li>
+                <li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section id="velocity-graph">
+            <h2>Simple vs. Easy: Velocity</h2>
+            <script type="text/javascript" charset="utf-8">
+              function v_easy (x) {
+                return 1/(Math.sqrt(x)) - 0.5;
+              }
+
+              function v_simple (x) {
+                return 1.2*Math.log(x * 10);
+              }
+
+              var xmin = .08,
+              xmax = 2,
+              N = 100,
+              data = d3.range(xmin, xmax, (xmax - xmin) / N).map(function (d) {
+                return {x: d - xmin * .8, y: v_easy(d)};
+              })
+              data2 = d3.range(xmin, xmax, (xmax - xmin) / N).map(function (d) {
+                return {x: d - xmin * .8, y: v_simple(d)};
+              });
+
+              // Build the plot.
+              var plot = xkcdplot();
+              plot("section#velocity-graph");
+              plot.xlabel("Time").ylabel("Velocity");
+
+              // Add the lines.
+              plot.plot(data);
+              plot.plot(data2, {stroke: "red"});
+
+              // Render the image.
+              plot.xlim([-0.2, 1.1]).ylim([-0.3,3]).draw();
+
+            </script>
+            <aside class="notes">
+            <p>Easy is blue, Simple is red.</p>
+            <p>The graph is vs. time, which is really about the lifecycle of a given piece of software. Yay for wildly unscientific, unit-less graphs!</p>
+            <p>For basic projects, easy is better - complexity just doesn't enter the picture. But complexity grows over time, and there's an inflection point where simple software will allow your velocity to increase.</p>
+            </aside>
+          </section>
+
+          <section id="coolness-graph">
+            <h2>Simple vs. Easy: Coolness</h2>
+            <script type="text/javascript">
+              // Generate some data.
+              function f1 (x) {
+                return Math.log((x * 5)) / Math.LN10;
+              }
+
+              function f2 (x) {
+                return x *  (x * .07 );
+              }
+
+              var xmin = .1,
+              xmax = 7,
+              N = 100,
+              data = d3.range(xmin, xmax, (xmax - xmin) / N).map(function (d) {
+                return {x: d, y: f1(d)};
+              })
+              data2 = d3.range(xmin, xmax, (xmax - xmin) / N).map(function (d) {
+                return {x: d, y: f2(d)};
+              });
+
+              // Build the plot.
+              var plot = xkcdplot();
+              plot("section#coolness-graph");
+              plot.xlabel("Effort/skill").ylabel("Coolness of shit");
+
+              // Add the lines.
+              plot.plot(data);
+              plot.plot(data2, {stroke: "red"});
+
+              // Render the image.
+              plot.xlim([-1.5, 7.5]).draw();
+
+            </script>
+            <aside class="notes">
+              <ul>
+                <li>different way of saying the same thing as the last one. ease has diminishing returns.</li>
+                <li>if you think about it a little more deeply, though, what this really saying is that, over time, systems built around 'easy' redirect effort and skill towards solving its own internal inconsistencies, rather than the primary problem.</li>
+                <li>in other words, yak-shaving.</li>
+                <li>but more dramatically: "easy enables REPLICATION. simple enables INNOVATION (and replication)."</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section id="replication-innovation">
+            <p>Easy enables <strong>Replication</strong></p>
+            <p>Simple enables <strong>Innovation</strong></p>
+          </section>
+
+          <section id="hoare-two-ways">
+            <blockquote>
+              There are two ways of constructing a software design: One way is to make it so simple that there are <strong>obviously no deficiencies</strong>, and the other way is to make it so complicated that there are <strong>no obvious deficiencies</strong>.
+            </blockquote>
+            <div class="quotee">Tony Hoare</div>
+            <!--<br/><blockquote>-->
+              <!--I have only made this letter longer because I have not had the time to make it shorter.-->
+            <!--</blockquote>-->
+            <!--<p>- Blaise Pascal (1657)</p>-->
+            <aside class="notes">
+            <p>i love this Hoare quote. it highlights two things:</p>
+            <ul>
+              <li>the previous slide's point: there comes a point at which software exceeds our capacity to reason about it</li>
+              <li>but also: one must aim for simplicity at the outset to achieve it</li>
+            </ul>
+            <!--<p>Better quote: Programming languages on the whole are very much more complicated than they used to be: object orientation, inheritance, and other features are still not really being thought through from the point of view of a coherent and scientifically well-based discipline or a theory of correctness. My original postulate, which I have been pursuing as a scientist all my life, is that one uses the criteria of correctness as a means of converging on a decent programming language design—one which doesn’t set traps for its users, and ones in which the different components of the program correspond clearly to different components of its specification, so you can reason compositionally about it.</p>-->
+            <!--<p>The Pascal quote is more subtle. it reminds us that achieving simplicity is not easy.</p>-->
+            </aside>
+          </section>
+
+          <section id="complexity-braiding">
+            <h2>Complexity as Braiding</h2>
+            <img src="img/3d4b.jpg" alt=""/>
+            <aside class="notes">
+            <p>OK, just a little bit more of definitions. first, a metaphor</p>
+            <p>I really like the braiding idea as a way of describing complexity. By twisting separate things together, we create artfiacts in which it is impossible to deal separately with the individual pieces.</p>
+            <p>Problem with the metaphor is that in a braid, we can still see individual strands. In a complex system, we typically cannot identify the original constituent pieces.</p>
+            </aside>
+          </section>
+
+          <section id="complect">
+            <h2>"Complect"</h2>
+            <p><em>archaic:</em> to braid together ("to make complex")</p>
+            <p>decomplect, "to unbraid, tease apart."</p>
+            <aside>
+              
+            </aside>
+          </section>
+
+
+          <section id="related-concepts">
+            <h3>Simplicity: the common thread</h3>
+            <ul>
+              <li>SOLID<ul>
+                <li>Interface Segregation</li>
+                <li>Dependency Inversion</li>
+              </ul></li>
+              <li>"The Unix Philosophy"</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>SOLID
+                <ul>
+                  <li>Single responsibility: i listed single responsibility as a characteristic of simplicity. this is a "split-brain" idea.</li>
+                  <li>Interface segregation: the most crucial here, and perhaps a more concrete way of referring to "single responsibility". (it's sorta the abstract version of that). but the idea is the same: interfaces, as the descriptors of sets of behavior, should concern themselves with only ONE behavior.</li>
+                  <li>Dependency inversion: depend on abstractions, not concretions. Very basic technique: you complect with an abstraction - an interface - instead of a single thing. it allows swapping later.</li>
+                </ul>
+                </li>
+                <li>Unix - small pieces, loosely coupled</li>
+              </ul>
+            </aside>
+          </section>
         </section>
 
-        <section id="simple-vs-easy">
-          <p>(sum up and compare simple vs. easy here)</p>
+        <section>
+          <section id="complexity-drupal">
+            <h2>Complexity in Drupal</h2>
+            <aside class="notes">
+            <ul>
+              <li>ok, let's get a little more concrete, and talk about how all this actually applies to Drupal.</li>
+              <li>this is the part where my talk really diverges from Rich Hickey's - he's essentially making an argument for functional programming and immutable state. while he's not incorrect, his perspective is too purist to be <em>useful</em> for something like Drupal.</li>
+              <li>honestly, this is a little hard to do. <em>so</em> much of Drupal is so complected together that picking out particular points is tricky. in his talk, Rich Hickey focuses on things like language aspects - say, syntax and parens - but we have few such luxuries.</li>
+              <li>but this goes back to the earlier question: what complexity is acceptable, and why?</li>
+              <li>i'd love folks to approach me later with (fairly clean, preferably) examples of how Drupal is complected. the better these examples are, the more we can build a good set of examples, the easier it will be for people to latch on to these concepts.</li>
+            </ul>
+            </aside>
+          </section>
+
+          <section id="stop-saying-this">
+            <h3>"It works, as long as no one does something stupid."</h3>
+            <p class="fragment"><small>OMG, STOP SAYING THIS</small></p>
+            <aside class="notes">
+              <ul>
+                <li>i hear this ALL THE TIME from Drupal folks. hell, i say it all the time. it's one of a litany of rationalizations we give for not designing tight systems.</li>
+                <li>in my view, it's a product of many factors - the fear that someone might have a use case we can't support, and the </li>
+                <li>there's also a deeper issue here: "it works" is not a good criteria. in fact, it's a terrible criteria.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section id="global-variables">
+            <h2>Global Variables</h2>
+            <ul>
+              <li>Complects your code with ALL other code in your PHP process</li>
+              <li>Somewhat less risky because failures tend to be obvious</li>
+              <li>But, they're hell for testing</li>
+            </ul>
+            <aside class="notes">
+
+            </aside>
+          </section>
+          <section id="global-variables-state">
+            <h2>Global Variables: State</h2>
+            <ul>
+              <li>Global vars are a more general problem of state</li>
+              <li>Complects value with time</li>
+              <li>Weaves into everything that touches it</li>
+              <li>Cannot be mitigated by modularization</li>
+              <li>Also just <em>wicked</em> easy</li>
+            </ul>
+          </section>
+          <section id="multisite">
+            <h2>Multisite</h2>
+            <ul>
+              <li>Complects sites together</li>
+              <li>Trades simple for easy, quite explicitly</li>
+              <li>ONE MORE</li>
+            </ul>
+            <aside class="notes">
+              
+            </aside>
+          </section>
+
+          <section id="config-entities">
+            <h2>Config Entities</h2>
+            <ul>
+              <li>Complects Config, Entities, and Plugins</li>
+              <li>This is not necessarily (all) bad</li>
+            </ul>
+            <pre><code data-trim>
+abstract class ConfigEntityBase extends Entity implements ConfigEntityInterface {};
+interface ConfigEntityInterface extends EntityInterface {};
+
+class EntityManager extends DefaultPluginManager implements EntityManagerInterface {};
+interface EntityManagerInterface extends PluginManagerInterface {};
+          </code></pre>
+            <aside class="notes">
+            <ul>
+              <li>some definitions first <ul>
+                <li>Entity: Drupal's fundamental data building block. the basis for attaching fields, for the typing and instancing of data.</li>
+                <li>Config: Key/value pairs representing configuration that can be safely moved between Drupal site instances.</li>
+                <li>Plugin: A bunch of logic, typically represented as a class, that solves a particular, well-defined logical problem.</li>
+              </ul></li>
+              <li>this is a good case, because it shows both folly and progress</li>
+            </ul>
+            </aside>
+          </section>
+          <section id="panels">
+            <h2>Panels</h2>
+            <ul>
+              <li>That's right, i'mma rip myself a new one</li>
+            </ul>
+          </section>
+          <section id="alter-hooks">
+            <h2>Alter Hooks</h2>
+            <ul>
+              <li>Complects logic through shared state</li>
+            </ul>
+          </section>
         </section>
 
-        <section id="construct-vs-artifact">
-          <h2>The Thing vs working with The Thing</h2>
+        <section id="solutions">
+          <h2>What's the fix?</h2>
           <ul>
-            <li></li>
+            <li>Decomplect: tease apart complex artifacts</li>
+            <li>Simplify: make new, less complex artifacts</li>
           </ul>
         </section>
 
-        <section id="priorities">
-          <h3>Both Simple and Easy are important (and difficult)</h3>
-          <p>But, without a deliberate hand, 'easy' gets all the attention.</p>
+        <section>
+          <section id="decomplect-hookalyzer">
+            <h2>Hooks, Alters, Hookalyzer</h2>
+            <ul>
+              <li>Hooks, especially alters, are strong complectors in Drupal</li>
+              <li>So, tease them apart!</li>
+              <li>Hookalyzer inspects alter hook data as it goes by, dumping the diff on each pass</li>
+            </ul>
+          </section>
         </section>
 
-        <section id="pascal">
-          <blockquote>
-            I have only made this letter longer because I have not had the time to make it shorter.
-          </blockquote>
-          <p>Blaise Pascal (Letter 16, 1657)</p>
+        <section>
+          <section id="the-final-frontier">
+            <h2>Gauntlet, Thrown</h2>
+            <p>(find image of drupal learning curve; modify to have the final level be, "i decomplect/simplify Drupal")</p>
+            <aside class="notes">
+              <p>this is the final frontier that one can reach as a Drupaller. (almost) no new features - just refining, decomplecting, simplifying.</p>
+            </aside>
+          </section>
         </section>
-
-        <section id="when-they-matter">
-          <h2>It's about time</h2>
-          <p><span class="kword">Easy</span> only matters up .</p>
-        </section>
-
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
-
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?#/themes">Default</a> -
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> <br>
-						<a href="?theme=moon#/themes">Moon</a> -
-						<a href="?theme=solarized#/themes">Solarized</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<section data-background="#007777">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#007777"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Repeated Image Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-				</section>
-
-				<section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
-					<h2>Background Transitions</h2>
-					<p>
-						Pass reveal.js the <code>backgroundTransition: 'slide'</code> config argument to make backgrounds slide rather than fade.
-					</p>
-				</section>
-
-				<section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
-					<h2>Background Transition Override</h2>
-					<p>
-						You can override background transitions per slide by using <code>data-background-transition="slide"</code>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-current-blue">highlight-current-blue</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
-
-				<section>
-					<h2>Stellar Links</h2>
-					<ul>
-						<li><a href="http://slid.es">Try the online editor</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
-					</ul>
-				</section>
-
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
-
 			</div>
 
 		</div>
@@ -539,7 +560,7 @@ function linkify( selector ) {
         width: 1280,
         height: 800,
 
-				theme: 'solarized', // available themes are in /css/theme
+				theme: 'default', // available themes are in /css/theme
 				transition: 'none', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling

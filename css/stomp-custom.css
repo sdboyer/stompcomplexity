@@ -23,5 +23,14 @@ span.akword {
 }
 
 span.subtle-text {
-  color: #93a1a1
+  color: #93a1a1;
+}
+
+div.quotee {
+  display: block;
+  position: relative;
+  width: 70%;
+  padding-top: 10px;
+  text-align: right;
+  font-size: 80%;
 }
