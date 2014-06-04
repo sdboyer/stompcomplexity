@@ -1,13 +1,22 @@
 table.word-table {
-  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  left: 3em;
+  /*width: 100%;*/
 }
 
 table.word-table tr {
-  line-height: 2em
+  line-height: 2em;
 }
 
 table.word-table td {
-  width: 50%;
+  /*width: 50%;*/
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+table.word-table td:nth-of-type(even) {
+  padding-left: 4em;
 }
 
 span.kword {
@@ -33,4 +42,50 @@ div.quotee {
   padding-top: 10px;
   text-align: right;
   font-size: 80%;
+}
+
+/**
+  * Sam Styling
+**/
+
+.gr-large {
+  width: 61.8046972%;
+  float: left;
+}
+
+.gr-small {
+  width: 38.1953028%;
+  float: right;
+}
+
+.half {
+  width: 50%;
+  float: left;
+}
+
+#braiding img {
+  margin-top: 0;
+}
+
+.reveal blockquote {
+  background: none;
+  text-align: right;
+  box-shadow: none;
+  border-right: .075em solid;
+  padding-right: .75em;
+  font-style: italic;
+}
+
+.reveal blockquote strong {
+  text-decoration: underline;
+}
+
+.reveal blockquote footer {
+  font-size: .75em;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
