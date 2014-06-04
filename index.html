@@ -206,10 +206,8 @@
             <div class="gr-large">
               <h2>Complexity as Braiding</h2>
               <div>
-              <ul>
-                <li><span class="akword">complect</span> - "to braid together, make complex"</li>
-                <li><span class="kword">decomplect</span> - "to unbraid, tease apart"</li>
-              </ul>
+                <p><span class="akword">complect</span> - "to braid together, make complex"</p>
+                <p><span class="kword">decomplect</span> - "to unbraid, tease apart"</p>
               <p><br/><em>constrast with:</em> <span class="kword">compose</span>, "to place together"</p>
               </div>
             </div>
@@ -321,7 +319,7 @@
           </section>
 
           <section id="coolness-graph">
-            <h2>Simple vs. Easy: Coolness</h2>
+            <h2 class="stick-top">Simple vs. Easy: Coolness</h2>
             <script type="text/javascript">
               // Generate some data.
               function f1 (x) {
@@ -435,8 +433,8 @@
             <ul>
               <li>Complects your code with ALL other code in your PHP process</li>
               <li>Somewhat less risky because failures tend to be obvious</li>
-              <li>But, they're hell for testing</li>
               <li>Also just <em>wicked</em> easy</li>
+              <li>But, they're hell for testing</li>
             </ul>
             <aside class="notes">
 
@@ -544,6 +542,12 @@ interface EntityInterface {
               <li>In practice, often amounts to "runtime configuration"</li>
               <li>Wreaks havoc on artifact stability</li>
             </ul>
+            <aside class="notes">
+              <ul>
+                <li>escape hatch amounts to kicking the can down the road. "not sure if we got this right."</li>
+                <li>it's a bizarre thing to say, that. we're not sure if we got this right? WE WROTE IT. WE DEFINED ITS RESPONSIBILITIES.</li>
+              </ul>
+            </aside>
           </section>
         </section>
 
@@ -576,21 +580,35 @@ interface EntityInterface {
             <h2>Collaboration Testing</h2>
             <ul>
               <li><a href="https://github.com/sdboyer/collaboration_test" >github.com/sdboyer/collaboration_test</a></li>
-              <li>Again, the hook system</li>
+              <li>Again, the entanglement of the hook system</li>
               <li>Answers: "is the system correct after this collaboration (hook)?"</li>
+              <li>Modules - core! - could write tests that deliver value to real sites.</li>
             </ul>
           </section>
 
           <section id="simplification">
             <h2>Simplification</h2>
             <ul>
-              <li>Harder to point ot a particular thing</li>
-              <li></li>
+              <li>Far easier to do in core than contrib</li>
+              <li>Try to build only on components you understand</li>
+              <li>Focus on swapping over altering</li>
             </ul>
+            <aside class="notes">
+              <p>harder to point out a particular thing to do.</p>
+            </aside>
           </section>
         </section>
 
         <section>
+          <section id="recap">
+            <h2>Recap</h2>
+            <ul>
+              <li>Simple, Easy are very different, and both important</li>
+              <li>Simplicity can enable easy, but not vice-versa</li>
+              <li>Simple is generative; easy is a dead end</li>
+              <li>Drupal desperately needs more simple systems, and simplicity-minded people</li>
+            </ul>
+          </section>
           <section id="learning-curve">
             <h2>The Learning Curve</h2>
             <img src="img/learning-curve.jpg" alt="The (original) Drupal learning curve"/>
@@ -598,6 +616,7 @@ interface EntityInterface {
           <section id="the-final-frontier">
             <h2>Gauntlet, Thrown</h2>
             <img src="img/learning-curve-new.jpg" alt="The new Drupal learning curve"/>
+            <p>Reducing complexity is the highest calling in Drupal</p>
             <aside class="notes">
               <p>this is the final frontier that one can reach as a Drupaller. (almost) no new features - just refining, decomplecting, simplifying.</p>
             </aside>
