@@ -34,3 +34,18 @@ div.quotee {
   text-align: right;
   font-size: 80%;
 }
+
+
+.gr-large {
+  width: 61.8046972%;
+  float: left;
+}
+
+.gr-small {
+  width: 38.1953028%;
+  float: right;
+}
+
+#braiding img {
+  margin-top: 0;
+}
