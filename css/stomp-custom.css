@@ -89,3 +89,12 @@ div.quotee {
   margin-top: .5em;
   margin-bottom: .5em;
 }
+
+body {
+  margin-top: 0 !important;
+}
+
+.complexity .state-background {
+  background: url('../img/tendril.jpg');
+  background-size: cover;
+}
