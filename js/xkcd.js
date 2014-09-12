@@ -164,7 +164,8 @@ function xkcdplot() {
                              .style("stroke", "white")
                              .style("stroke-width", 2 * strokeWidth + "px")
                              .style("fill", "none")
-                             .attr("class", "bgline");
+                             .attr("class", "bgline")
+                             .text("foo");
         el.append("svg:path").attr("d", line(data))
                              .style("stroke", color)
                              .style("stroke-width", strokeWidth + "px")

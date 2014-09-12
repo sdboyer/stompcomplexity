@@ -74,7 +74,7 @@
 
         <section id="thieving-flattery">
           <p>Much of this talk is proudly purloined from Rich Hickey's <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a></p>
-          <p><small>(If you haven't seen it, you should fix that)</small></p>
+          <p><small>(If you haven't seen it, fix dat)</small></p>
           <aside class="notes">
           <p>a ton of this talk is lifted pretty directly from a fantastic talk given by Rich Hickey, the creator of Clojure, at Strange Loop in 2011. (but hey, it's ok, because i'm acknowledging it!)</p>
           <p>While i did come up with the general idea for this talk before having seen Rich Hickey's talk, that talk gave fundamental shape and form to this one</p>
@@ -117,42 +117,6 @@
             </aside>
           </section>
 
-          <section id="easy-is">
-            <h2>Easy</h2>
-            <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
-            <p class="fragment"><em>relative, subjective</em></p>
-            <aside class="notes">
-            <ul>
-              <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
-              <li>'ease' is inherently subjective. and we are OBSESSED with it - as software engineers, and maybe even as humans in general.</li>
-            </ul>
-            </aside>
-          </section>
-
-          <section id="easy-qualities">
-            <h3>Easy: "Near, Effortless"</h3>
-            <ul>
-              <li>In our tooling:
-              <ul>
-                <li>WYSIWYG</li>
-                <li>Devel module</li>
-                <li>Package managers</li>
-              </ul></li>
-              <li>Close to our existing skills and knowledge</li>
-              <li>Minimal effort required for understanding/mastery</li>
-            </ul>
-            <aside class="notes">
-              <ul>
-                <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
-                <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
-                <li>Devel module: here, "ease" is all about locating tools in a single place</li>
-              </ul>
-              <p>ultimately we're talking about a specific group of people, and the knowledge/experience we <em>think</em> they have. and we want to minimize the effort for them to pick up a new thing.</p>
-              <p>this is FUNDAMENTALLY DIFFERENT from talking about the intrinsic simplicity of a thing. (it's also one way to build an island, btw)</p>
-              <p>playing the violin is not EASY for me, but it may be EASY for many of you. or, one better - reading Braille.</p>
-            </aside>
-          </section>
-
           <section id="simple-as-one">
             <h2>Simple</h2>
             <p>Simple is often about 'oneness':</p>
@@ -172,33 +136,69 @@
             </aside>
           </section>
 
-          <section id="simple-as-not-one">
-            <p>But simplicity does not mean just 'having one':</p>
-            <ul>
-              <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
-              <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
-              <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
-            </ul>
-            <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
+            <section id="simple-as-not-one">
+                <p>But simplicity does not mean just 'having one':</p>
+                <ul>
+                    <li>One node <span class="subtle-text"><em>(vs two?)</em></span></li>
+                    <li>One instance <span class="subtle-text"><em>(vs five?)</em></span></li>
+                    <li>One operation <span class="subtle-text"><em>(vs ten?)</em></span></li>
+                </ul>
+                <p class="fragment"><em>Cardinality</em> - largely irrelevant to simplicity</p>
+                <aside class="notes">
+                    <ul>
+                        <li>however, it's perfectly possible for us to have "more than oneness" without increasing complexity</li>
+                        <li>the key here is that in each of these examples, adding more of them does not increase intrinsic complexity.</li>
+                        <li>this is because each of these things are increasing in cardinality - the count of a thing, not the number of types of things.</li>
+                        <li>if it helps, think of this as "difference of kind" - interleaving, simplicity - versus "difference of degree" - cardinality.</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section id="simple-is">
+                <p>Simple is <em>instrinsic and objective</em></p>
+                <aside class="notes">
+                    <ul>
+                        <li>most important, simplicity is objective. it is an intrinsic property of the thing itself.</li>
+                        <li>it does not need a person looking at it for it to be simple.</li>
+                        <li>all of that is in stark contrast to ease. Ease goes away over time; simplicity/complexity never does.</li>
+                    </ul>
+                    <p>OK - why is it so important we define these things?</p>
+                </aside>
+            </section>
+
+          <section id="easy-is">
+            <h2>Easy</h2>
+            <p><em>adjacens:</em> to lie near <span class='subtle-text fragment'>(me)</span></p>
+            <p class="fragment"><em>relative, subjective</em></p>
             <aside class="notes">
             <ul>
-              <li>however, it's perfectly possible for us to have "more than oneness" without increasing complexity</li>
-              <li>the key here is that in each of these examples, adding more of them does not increase intrinsic complexity.</li>
-              <li>this is because each of these things are increasing in cardinality - the count of a thing, not the number of types of things.</li>
-              <li>if it helps, think of this as "difference of kind" - interleaving, simplicity - versus "difference of degree" - cardinality.</li>
+              <li>remember our etymology: "to lie near". near...what? well, an agent. a person. so...me!</li>
+              <li>'ease' is inherently subjective. and we are OBSESSED with it - as software engineers, and maybe even as humans in general.</li>
             </ul>
             </aside>
           </section>
 
-          <section id="simple-is">
-            <p>Simple is <em>instrinsic and objective</em></p>
+          <section id="easy-qualities">
+            <h3>Easy: "Near, Effortless"</h3>
+            <ul>
+              <li>In our tooling:
+              <ul>
+                <li>WYSIWYG</li>
+                <li>Package managers</li>
+                <li>Devel module</li>
+              </ul></li>
+              <li>Close to our existing skills and knowledge</li>
+              <li>Minimal effort required for understanding/mastery</li>
+            </ul>
             <aside class="notes">
               <ul>
-                <li>most important, simplicity is objective. it is an intrinsic property of the thing itself.</li>
-                <li>it does not need a person looking at it for it to be simple.</li>
-                <li>all of that is in stark contrast to ease. Ease goes away over time; simplicity/complexity never does.</li>
+                <li>WYSIWYG - it's "near" to the editors' understanding, mental model of configuring digital text (is it still?)</li>
+                <li>package managers: abstract the task of collecting and installing dependencies (for your system, app, whatever)</li>
+                <li>Devel module: here, "ease" is all about locating tools in a single place</li>
               </ul>
-              <p>OK - why is it so important we define these things?</p>
+              <p>ultimately we're talking about a specific group of people, and the knowledge/experience we <em>think</em> they have. and we want to minimize the effort for them to pick up a new thing.</p>
+              <p>this is FUNDAMENTALLY DIFFERENT from talking about the intrinsic simplicity of a thing. (it's also one way to build an island, btw)</p>
+              <p>playing the violin is not EASY for me, but it may be EASY for many of you. or, one better - reading Braille.</p>
             </aside>
           </section>
 
@@ -223,6 +223,77 @@
           </section>
         </section>
         <section>
+            <section id="hawk-and-hare">
+                <h2>The Hawk and the Hare</h2>
+                <p><em>warning -- math!</em></p>
+            </section>
+            <section id="prologue">
+                <h2>Prologue</h2>
+                <p>There's a hare on the ground.</p>
+                <p>There's a hawk in the sky, 100 meters above.</p>
+                <br/>
+                <p>The hawk is hungry.</p>
+            </section>
+            <section id="velocity">
+                <h2>Distance</h2>
+                <p>The hawk can dive at 10m/s.</p>
+                <p>How long until she reaches the hare?</p>
+            </section>
+            <section id="space">
+                <h2>Realistic Descent</h2>
+                <p>Hawks can't dive straight down - she descends in circles, tracing a conical path.</p>
+                <p>Her maximum angle of descent is 75 degrees.</p>
+                <br/>
+                <p>How long until she grabs the hare?</p>
+            </section>
+            <section id="acceleration">
+                <h2>Acceleration</h2>
+                <p>The hawk can accelerate at 3m/s/s, up to a maximum of 15m/s.</p>
+                <br/>
+                <p>How long until she snatches the hare?</p>
+            </section>
+            <section id="centripetal-limitations">
+                <h2>Centripetal Limits</h2>
+                <p>As the hawk turns more quickly through the narrowing descent cone, centripetal force reduces her velocity.</p>
+                <p>Her maximum velocity decreases linearly in proportion to the percentage of maximum turn rate reached.</p>
+								<br/>
+								<p>Her maximum turn rate is 135 degrees per second.</p>
+                <p>At maximum turn rate, her maximum forward velocity is reduced to 33% (5m/s).</p>
+                <br/>
+                <p>How long until dinner?</p>
+            </section>
+            <section id="hare-moves">
+                <h2>Hare: not an idiot</h2>
+                <p>The hare starts moving, 3m/s in one direction.</p>
+                <p>The hawk reorients to the hare's position every two seconds.</p>
+                <br/>
+                <p>How long...</p>
+            </section>
+						<section>
+							<h3>It is far easier to generate complexity than to deal with it</h3>
+						</section>
+
+					<section id="complexity-vs-reasoning">
+						<h2>Complexity vs. Reasoning</h2>
+						<ul>
+							<li>Modifying a system requires the ability to reason about it</li>
+							<li>Complexity is the primary limitation on our ability to reason</li>
+							<li>Our ability to create complexity exceeds our capacity to reason about it</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Reasoning is the chief thing that matters when it comes to working with a system. If we can't reason about it, we can accomplish only the most rudimentary of tasks.</li>
+								<li>The complexity of a system - the number of interleaved, independent parts - is really what determines our ability to reason about a system. (use hawk story here; maybe find another)</li>
+								<li>"exceeds" is a massive understatement. our ability to create complexity is unbounded. our ability to reason about it is VERY bounded. diffrential human capabilities in reasoning are insignificant in the face of the complexity we can create</li>
+								<li>Bill, Jamal, Pooja</li>
+								<li>there is a rather obvious conclusion here: if you don't build for simplicity, your system will not scale well into complex requirements/over time, and you will leave the humans that use it grasping at straws</li>
+								<li>there's also an axiom to be had: braiding is a good metaphor, but a more practical question to ask yourself is, "how will this change i make impact peoples' ability to reason about the system?"</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+
+        <section>
           <section id="dijkstra-prerequisite">
             <blockquote>
               <p>Simplicity is prerequisite for reliability.</p>
@@ -234,25 +305,6 @@
               <li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
               <li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
             </ul>
-            </aside>
-          </section>
-
-          <section id="complexity-vs-reasoning">
-            <h2>Complexity vs. Reasoning</h2>
-            <ul>
-              <li>Modifying a system requires the ability to reason about it</li>
-              <li>Complexity is the primary limitation on our ability to reason</li>
-              <li>Our ability to create complexity exceeds our capacity to reason about it</li>
-            </ul>
-            <aside class="notes">
-              <ul>
-                <li>Reasoning is the chief thing that matters when it comes to working with a system. If we can't reason about it, we can accomplish only the most rudimentary of tasks.</li>
-                <li>The complexity of a system - the number of interleaved, independent parts - is really what determines our ability to reason about a system. (use hawk story here; maybe find another)</li>
-                <li>"exceeds" is a massive understatement. our ability to create complexity is unbounded. our ability to reason about it is VERY bounded. diffrential human capabilities in reasoning are insignificant in the face of the complexity we can create</li>
-                <li>Bill, Jamal, Pooja</li>
-                <li>there is a rather obvious conclusion here: if you don't build for simplicity, your system will not scale well into complex requirements/over time, and you will leave the humans that use it grasping at straws</li>
-                <li>there's also an axiom to be had: braiding is a good metaphor, but a more practical question to ask yourself is, "how will this change i make impact peoples' ability to reason about the system?"</li>
-              </ul>
             </aside>
           </section>
 
@@ -273,12 +325,12 @@
           </section>
 
           <section id="to-and-fro">
-            <h3>Simple things can generally be made easy</h3><br/>
+            <h3>Simple things can often be made easy</h3><br/>
             <h3>The reverse does not hold</h3>
           </section>
 
           <section id="velocity-graph">
-            <h2>Simple vs. Easy: Velocity</h2>
+            <h2>Simple vs. Easy: Project Velocity</h2>
             <script type="text/javascript" charset="utf-8">
               function v_easy (x) {
                 return 1/(Math.sqrt(x)) - 0.5;
