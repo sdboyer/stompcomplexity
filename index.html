@@ -53,7 +53,7 @@
         </section>
 
         <section id="goals">
-          <h3>This is a rather heady talk</h3>
+          <h3>This is a kinda heady talk</h3>
           <p>Some things I hope you'll come away with:</p>
           <ul>
             <li>New words, and new ideas about familiar words</li>
@@ -225,7 +225,7 @@
         <section>
             <section id="hawk-and-hare">
                 <h2>The Hawk and the Hare</h2>
-                <p><em>warning -- math!</em></p>
+                <p><em>maths!</em></p>
             </section>
             <section id="prologue">
                 <h2>Prologue</h2>
@@ -234,23 +234,23 @@
                 <br/>
                 <p>The hawk is hungry.</p>
             </section>
-            <section id="velocity">
+						<section id="velocity">
                 <h2>Distance</h2>
                 <p>The hawk can dive at 10m/s.</p>
                 <p>How long until she reaches the hare?</p>
             </section>
-            <section id="space">
+            <section id="acceleration">
+								<h2>Acceleration</h2>
+								<p>The hawk can accelerate at 3m/s/s, up to a maximum of 15m/s.</p>
+								<br/>
+								<p>How long until she snatches the hare?</p>
+						</section>
+						<section id="space">
                 <h2>Realistic Descent</h2>
                 <p>Hawks can't dive straight down - she descends in circles, tracing a conical path.</p>
                 <p>Her maximum angle of descent is 75 degrees.</p>
                 <br/>
                 <p>How long until she grabs the hare?</p>
-            </section>
-            <section id="acceleration">
-                <h2>Acceleration</h2>
-                <p>The hawk can accelerate at 3m/s/s, up to a maximum of 15m/s.</p>
-                <br/>
-                <p>How long until she snatches the hare?</p>
             </section>
             <section id="centripetal-limitations">
                 <h2>Centripetal Limits</h2>
@@ -262,10 +262,10 @@
                 <br/>
                 <p>How long until dinner?</p>
             </section>
-            <section id="hare-moves">
+            <section id="hare-not-an-idiot">
                 <h2>Hare: not an idiot</h2>
                 <p>The hare starts moving, 3m/s in one direction.</p>
-                <p>The hawk reorients to the hare's position every two seconds.</p>
+                <p>The hawk continuously reorients on the hare's as long as it's in view.</p>
                 <br/>
                 <p>How long...</p>
             </section>
@@ -278,7 +278,7 @@
 						<ul>
 							<li>Modifying a system requires the ability to reason about it</li>
 							<li>Complexity is the primary limitation on our ability to reason</li>
-							<li>Our ability to create complexity exceeds our capacity to reason about it</li>
+							<li>Our ability to create complexity <em>vastly</em> exceeds our capacity to reason about it</li>
 						</ul>
 						<aside class="notes">
 							<ul>
@@ -294,43 +294,23 @@
 				</section>
 
         <section>
-          <section id="dijkstra-prerequisite">
-            <blockquote>
-              <p>Simplicity is prerequisite for reliability.</p>
-              <footer>Edsger W. Dijkstra</footer>
-            </blockquote>
-            <aside class="notes">
-            <ul>
-              <li>the great Dutch compsci Dijkstra</li>
-              <li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
-              <li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
-            </ul>
-            </aside>
-          </section>
-
-          <section id="priorities">
-            <h3>Simple and Easy are both important (and difficult)</h3>
-            <p>Easy gets the attention by default. Simple requires conscious effort.</p><br/>
-            <p><em>Crucial question: </em>is this acceptable complexity?</p>
-            <aside class="notes">
-              <ul>
-                <li>this talk is worth giving because our collective tendency - especially in Drupal - is to tend towards ease. </li>
-                <li>Dijkstra again: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."</li>
-                <li>nevertheless, both of them are important. you can build the most elegant, simple system ever, but that does not guarantee it will be easy - and if nobody can get over the hump of learning it, does your system matter?</li>
-                <li>this is why we must ask the crucial question - whether the complexity is acceptable.</li>
-                <li>because complexity, once introduced, never goes away, whereas easy fades. complexity is carried into EVERY system that builds on yours. don't forget, it's intrinsic!</li>
-                <li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
-              </ul>
-            </aside>
-          </section>
-
-          <section id="to-and-fro">
-            <h3>Simple things can often be made easy</h3><br/>
-            <h3>The reverse does not hold</h3>
-          </section>
+					<section id="dijkstra-prerequisite">
+						<blockquote>
+							<p>Simplicity is prerequisite for reliability.</p>
+							<footer>Edsger W. Dijkstra</footer>
+						</blockquote>
+						<aside class="notes">
+						<ul>
+							<li>the great Dutch compsci Dijkstra</li>
+							<li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
+							<li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
+						</ul>
+						</aside>
+					</section>
 
           <section id="velocity-graph">
-            <h2>Simple vs. Easy: Project Velocity</h2>
+            <h2><span class="bered">Simple</span> vs. <span class="beblue">Easy</span>: Project Velocity</h2>
+						<div id="velocity-plot">
             <script type="text/javascript" charset="utf-8">
               function v_easy (x) {
                 return 1/(Math.sqrt(x)) - 0.5;
@@ -371,7 +351,7 @@
           </section>
 
           <section id="coolness-graph">
-            <h2 class="stick-top">Simple vs. Easy: Coolness</h2>
+            <h2><span class="bered">Simple</span> vs. <span class="beblue">Easy</span>: Coolness</h2>
             <script type="text/javascript">
               // Generate some data.
               function f1 (x) {
@@ -415,30 +395,31 @@
             </aside>
           </section>
 
-          <section id="replication-transformation">
-            <p>Easy enables <strong>Replication</strong></p>
-            <p>Simple enables <strong>Transformation</strong></p>
-          </section>
+					<section id="priorities">
+						<h3>Simple and Easy are both important (and difficult)</h3>
+						<p>Easy gets the attention by default. Simple requires deliberate effort.</p><br/>
+						<!-- <p><em>Crucial question: </em>is this acceptable complexity?</p> -->
+						<aside class="notes">
+							<ul>
+								<li>this talk is worth giving because our collective tendency - especially in Drupal - is to tend towards ease. </li>
+								<li>Dijkstra again: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."</li>
+								<li>nevertheless, both of them are important. you can build the most elegant, simple system ever, but that does not guarantee it will be easy - and if nobody can get over the hump of learning it, does your system matter?</li>
+								<li>this is why we must ask the crucial question - whether the complexity is acceptable.</li>
+								<li>because complexity, once introduced, never goes away, whereas easy fades. complexity is carried into EVERY system that builds on yours. don't forget, it's intrinsic!</li>
+								<li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
+							</ul>
+						</aside>
+					</section>
 
-          <section id="hoare-two-ways">
-            <blockquote>
-              <p>There are two ways of constructing a software design: One way is to make it so simple that there are <strong>obviously no deficiencies</strong>, and the other way is to make it so complicated that there are <strong>no obvious deficiencies</strong>.</p>
-              <footer>Tony Hoare</footer>
-            </blockquote>
-            <!--<br/><blockquote>-->
-              <!--I have only made this letter longer because I have not had the time to make it shorter.-->
-            <!--</blockquote>-->
-            <!--<p>- Blaise Pascal (1657)</p>-->
-            <aside class="notes">
-            <p>i love this Hoare quote. it highlights two things:</p>
-            <ul>
-              <li>the previous slide's point: there comes a point at which software exceeds our capacity to reason about it</li>
-              <li>but also: one must aim for simplicity at the outset to achieve it</li>
-            </ul>
-            <!--<p>Better quote: Programming languages on the whole are very much more complicated than they used to be: object orientation, inheritance, and other features are still not really being thought through from the point of view of a coherent and scientifically well-based discipline or a theory of correctness. My original postulate, which I have been pursuing as a scientist all my life, is that one uses the criteria of correctness as a means of converging on a decent programming language design—one which doesn’t set traps for its users, and ones in which the different components of the program correspond clearly to different components of its specification, so you can reason compositionally about it.</p>-->
-            <!--<p>The Pascal quote is more subtle. it reminds us that achieving simplicity is not easy.</p>-->
-            </aside>
-          </section>
+					<section id="replication-transformation">
+						<p>Easy enables <strong>Replication</strong></p>
+						<p>Simple enables <strong>Transformation</strong></p>
+					</section>
+
+					<section id="to-and-fro">
+						<h3>Simple things can often be made easy</h3><br/>
+						<h3>The reverse does not hold</h3>
+					</section>
 
           <section id="related-concepts">
             <h3>Simplicity: the common thread</h3>
@@ -465,6 +446,26 @@
             </aside>
           </section>
         </section>
+
+					<!-- <section id="hoare-two-ways">
+						<blockquote>
+							<p>There are two ways of constructing a software design: One way is to make it so simple that there are <strong>obviously no deficiencies</strong>, and the other way is to make it so complicated that there are <strong>no obvious deficiencies</strong>.</p>
+							<footer>Tony Hoare</footer>
+						</blockquote>
+						<br/><blockquote>
+							I apologize for the length of this [program], I did not have time to make it shorter.
+							<footer>~Blaise Pascal (1657)</footer>
+						</blockquote>
+						<aside class="notes">
+						<p>i love this Hoare quote. it highlights two things:</p>
+						<ul>
+							<li>the previous slide's point: there comes a point at which software exceeds our capacity to reason about it</li>
+							<li>but also: one must aim for simplicity at the outset to achieve it</li>
+						</ul>
+						<p>Better quote: Programming languages on the whole are very much more complicated than they used to be: object orientation, inheritance, and other features are still not really being thought through from the point of view of a coherent and scientifically well-based discipline or a theory of correctness. My original postulate, which I have been pursuing as a scientist all my life, is that one uses the criteria of correctness as a means of converging on a decent programming language design—one which doesn’t set traps for its users, and ones in which the different components of the program correspond clearly to different components of its specification, so you can reason compositionally about it.</p>
+						<p>The Pascal quote is more subtle. it reminds us that achieving simplicity is not easy.</p>
+						</aside>
+					</section> -->
 
         <section>
           <section id="complexity-drupal" data-background="img/tendril.jpg">
@@ -495,7 +496,7 @@
           <section id="global-variables-state">
             <h3>State</h3>
             <ul>
-              <li>Global vars are a more general problem of state</li>
+              <li>Global vars are a more general problem of mutable state</li>
               <li>Complects value with time</li>
               <li>Weaves into everything that touches it</li>
               <li>Cannot be mitigated by modularization</li>
@@ -516,7 +517,7 @@
             </aside>
           </section>
 
-          <section id="config-entities">
+          <!-- <section id="config-entities">
             <h2>Config Entities</h2>
             <ul>
               <li>Complects Config, Entities, and Plugins</li>
@@ -585,7 +586,7 @@ interface EntityInterface {
                 <li>it takes a "share nothing" approach. but this is an incorrect modeling of the domain - sites are composed of shared elements</li>
               </ul>
             </aside>
-          </section>
+          </section> -->
           <section id="alter-hooks">
             <h2>Alter Hooks</h2>
             <ul>
@@ -628,7 +629,7 @@ interface EntityInterface {
               <li>Hookalyzer inspects alter data as it goes by, recording a diff for each pass</li>
             </ul>
           </section>
-          <section id="decomplect-collab-testing">
+          <!-- <section id="decomplect-collab-testing">
             <h2>Collaboration Testing</h2>
             <ul>
               <li><a href="https://github.com/sdboyer/collaboration_test" >github.com/sdboyer/collaboration_test</a></li>
@@ -636,7 +637,7 @@ interface EntityInterface {
               <li>Answers: "is the system correct after this collaboration (hook)?"</li>
               <li>Modules - core! - could write tests that deliver value to real sites.</li>
             </ul>
-          </section>
+          </section> -->
 
           <section id="simplification">
             <h2>Simplification</h2>

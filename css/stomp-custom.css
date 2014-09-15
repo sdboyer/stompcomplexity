@@ -31,6 +31,14 @@ span.akword {
   font-size: 120%;
 }
 
+span.bered {
+  color: red;
+}
+
+span.beblue {
+  color: steelblue;
+}
+
 span.subtle-text {
   color: #93a1a1;
 }
