@@ -269,48 +269,120 @@
                 <br/>
                 <p>How long...</p>
             </section>
-						<section>
-							<h3>It is far easier to generate complexity than to deal with it</h3>
-						</section>
+            <section>
+                <h3>It is far easier to generate complexity than to deal with it</h3>
+            </section>
 
-					<section id="complexity-vs-reasoning">
-						<h2>Complexity vs. Reasoning</h2>:
-						<ul>
-							<li>Modifying a system requires the ability to reason about it</li>
-							<li>Complexity is the primary limitation on our ability to reason</li>
-							<li>Our ability to create complexity <em>vastly</em> exceeds our capacity to reason about it</li>
-						</ul>
-						<aside class="notes">
-							<ul>
-								<li>Reasoning is the chief thing that matters when it comes to working with a system. If we can't reason about it, we can accomplish only the most rudimentary of tasks.</li>
-								<li>The complexity of a system - the number of interleaved, independent parts - is really what determines our ability to reason about a system. (use hawk story here; maybe find another)</li>
-								<li>"exceeds" is a massive understatement. our ability to create complexity is unbounded. our ability to reason about it is VERY bounded. diffrential human capabilities in reasoning are insignificant in the face of the complexity we can create</li>
-								<li>Bill, Jamal, Pooja</li>
-								<li>there is a rather obvious conclusion here: if you don't build for simplicity, your system will not scale well into complex requirements/over time, and you will leave the humans that use it grasping at straws</li>
-								<li>there's also an axiom to be had: braiding is a good metaphor, but a more practical question to ask yourself is, "how will this change i make impact peoples' ability to reason about the system?"</li>
-							</ul>
-						</aside>
-					</section>
-				</section>
+            <section id="complexity-vs-reasoning">
+                <h2>Complexity vs. Reasoning</h2>
+                <ul>
+                    <li>Modifying a system requires the ability to reason about it</li>
+                    <li>Complexity is the primary limitation on our ability to reason</li>
+                    <li>Our ability to create complexity <em>vastly</em> exceeds our capacity to reason about it</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Reasoning is the chief thing that matters when it comes to working with a system. If we can't reason about it, we can accomplish only the most rudimentary of tasks.</li>
+                        <li>The complexity of a system - the number of interleaved, independent parts - is really what determines our ability to reason about a system. (use hawk story here; maybe find another)</li>
+                        <li>"exceeds" is a massive understatement. our ability to create complexity is unbounded. our ability to reason about it is VERY bounded. diffrential human capabilities in reasoning are insignificant in the face of the complexity we can create</li>
+                        <li>Bill, Jamal, Pooja</li>
+                        <li>there is a rather obvious conclusion here: if you don't build for simplicity, your system will not scale well into complex requirements/over time, and you will leave the humans that use it grasping at straws</li>
+                        <li>there's also an axiom to be had: braiding is a good metaphor, but a more practical question to ask yourself is, "how will this change i make impact peoples' ability to reason about the system?"</li>
+                    </ul>
+                </aside>
+            </section>
+            <section id="humans-vs-complexity">
+							<h2>Humans vs. Complexity</h2>
+							<svg id="hvc-chart"></svg>
+							<script type="text/javascript" charset="utf-8">
+
+								var values = [
+										{
+											name: "Bob",
+											value: 2
+										},
+										{
+											name: "Jamal",
+											value: 4
+										},
+										{
+											name: "Pooja",
+											value: 7
+										}
+									];
+
+								var margin = {top: 15, right: 25, bottom: 40, left: 40},
+								  width = 600 - margin.left - margin.right,
+								  height = 400 - margin.top - margin.bottom;
+
+								var chart = d3.select("#hvc-chart")
+										.attr("width", width + margin.left + margin.right)
+										.attr("height", height + margin.top + margin.bottom)
+									.append("g")
+    								.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+								var y = d3.scale.linear()
+										.range([height, 0])
+										.domain([0, d3.max(values.map(function(d) { return d.value } ))]);
+
+								var x = d3.scale.ordinal()
+										.rangeRoundBands([0, height], .5)
+										.domain(values.map(function(d) { return d.name }));
+
+								var xAxis = d3.svg.axis()
+										.scale(x)
+										.orient("bottom");
+
+								var yAxis = d3.svg.axis()
+										.scale(y)
+										.ticks(0)
+										.orient("left");
+
+								chart.append("g")
+							      .attr("class", "x axis")
+							      .attr("transform", "translate(0," + height + ")")
+							      .call(xAxis);
+
+							  chart.append("g")
+							      .attr("class", "y axis")
+							      .call(yAxis)
+							    .append("text")
+							      .attr("transform", "rotate(-90)")
+							      .attr("y", 6)
+							      .attr("dy", ".71em")
+							      .style("text-anchor", "end")
+										.text("Complexity");
+
+							  chart.selectAll(".bar")
+							      .data(values)
+							    .enter().append("rect")
+							      .attr("class", "bar")
+							      .attr("x", function(d) { return x(d.name); })
+							      .attr("width", x.rangeBand())
+							      .attr("y", function(d) { return y(d.value); })
+							      .attr("height", function(d) { return height - y(d.value); });
+
+							</script>
+            </section>
+        </section>
 
         <section>
-					<section id="dijkstra-prerequisite">
-						<blockquote>
-							<p>Simplicity is prerequisite for reliability.</p>
-							<footer>Edsger W. Dijkstra</footer>
-						</blockquote>
-						<aside class="notes">
-						<ul>
-							<li>the great Dutch compsci Dijkstra</li>
-							<li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
-							<li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
-						</ul>
-						</aside>
-					</section>
+            <section id="dijkstra-prerequisite">
+                <blockquote>
+                    <p>Simplicity is prerequisite for reliability.</p>
+                    <footer>Edsger W. Dijkstra</footer>
+                </blockquote>
+                <aside class="notes">
+                    <ul>
+                        <li>the great Dutch compsci Dijkstra</li>
+                        <li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
+                        <li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
+                    </ul>
+                </aside>
+            </section>
 
           <section id="velocity-graph">
             <h2><span class="bered">Simple</span> vs. <span class="beblue">Easy</span>: Project Velocity</h2>
-						<div id="velocity-plot">
             <script type="text/javascript" charset="utf-8">
               function v_easy (x) {
                 return 1/(Math.sqrt(x)) - 0.5;
