@@ -27,7 +27,7 @@ path.axis {
 }
 
 path.bgline {
-    stroke: white;
+    stroke: black;
     stroke-width: 6px;
 }
 

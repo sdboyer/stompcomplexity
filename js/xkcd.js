@@ -73,14 +73,10 @@ function xkcdplot() {
         el.selectAll(".axis").remove();
         el.append("svg:path")
             .attr("class", "x axis")
-            .style("stroke", "white")
             .attr("d", axis([[0, y0], [width, y0]]));
-
         el.append("svg:path")
             .attr("class", "y axis")
-            .style("stroke", "white")
             .attr("d", axis([[x0, 0], [x0, height]]));
-
 
         // Laboriously draw some arrows at the ends of the axes.
         var aa = arrowAspect * arrowSize,
@@ -88,19 +84,15 @@ function xkcdplot() {
             s = arrowSize;
         el.append("svg:path")
             .attr("class", "x axis arrow")
-            .style("stroke", "white")
             .attr("d", axis([[width - s + o, y0 + aa], [width + o, y0], [width - s + o, y0 - aa]]));
         el.append("svg:path")
             .attr("class", "x axis arrow")
-            .style("stroke", "white")
             .attr("d", axis([[s - o, y0 + aa], [-o, y0], [s - o, y0 - aa]]));
         el.append("svg:path")
             .attr("class", "y axis arrow")
-            .style("stroke", "white")
             .attr("d", axis([[x0 + aa, s - o], [x0, -o], [x0 - aa, s - o]]));
         el.append("svg:path")
             .attr("class", "y axis arrow")
-            .style("stroke", "white")
             .attr("d", axis([[x0 + aa, height - s + o], [x0, height + o], [x0 - aa, height - s + o]]));
 
         for (var i = 0, l = elements.length; i < l; ++i) {
@@ -114,7 +106,6 @@ function xkcdplot() {
                               .attr("x", width - s)
                               .attr("y", y0 + aa)
                               .attr("dy", ".75em")
-                              .style("stroke", "white")
                               .text(xlabel);
         el.append("text").attr("class", "y label")
                               .attr("text-anchor", "end")
@@ -122,7 +113,6 @@ function xkcdplot() {
                               .attr("y", x0)
                               .attr("dy", "-.75em")
                               .attr("transform", "rotate(-90)")
-                              .style("stroke", "white")
                               .text(ylabel);
 
         // And a title.
@@ -174,7 +164,8 @@ function xkcdplot() {
                              .style("stroke", "white")
                              .style("stroke-width", 2 * strokeWidth + "px")
                              .style("fill", "none")
-                             .attr("class", "bgline");
+                             .attr("class", "bgline")
+                             .text("foo");
         el.append("svg:path").attr("d", line(data))
                              .style("stroke", color)
                              .style("stroke-width", strokeWidth + "px")
