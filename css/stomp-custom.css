@@ -106,3 +106,7 @@ body {
   background: url('../img/tendril.jpg');
   background-size: cover;
 }
+
+.over-image {
+    color: white;
+}

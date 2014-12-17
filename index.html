@@ -58,9 +58,8 @@
           <ul>
             <li>New words, and new ideas about familiar words</li>
             <li>New metaphors for thinking about Drupal, but systems in general</li>
-            <li>A belief that Drupal's complexity can be mitigated</li>
-            <li>That doing so is <em>paramount</em> to the health of the project</li>
-            <li>And that reducing complexity is Drupal's highest calling</li>
+            <li>What you, individually, can do to mitigate Drupal's complexity</li>
+            <li>And that doing so is Drupal's greatest need, and highest calling</li>
           </ul>
           <aside class="notes">
             <ul>
@@ -97,7 +96,7 @@
               </tr>
               <tr>
                 <td>one fold, braid</td>
-                <td>lack of effort <span class="subtle-text fragment" data-fragment-index="1">(to lie near)</span></td>
+                <td>at leisure <span class="subtle-text fragment" data-fragment-index="1">(to lie near)</span></td>
               </tr>
               <tr>
                 <td>vs  <span class="akword">complex</span></td>
@@ -188,7 +187,7 @@
                 <li>Devel module</li>
               </ul></li>
               <li>Close to our existing skills and knowledge</li>
-              <li>Minimal effort required for understanding/mastery</li>
+              <li>Minimal effort required for considerable utility</li>
             </ul>
             <aside class="notes">
               <ul>
@@ -222,6 +221,7 @@
             </aside>
           </section>
         </section>
+
         <section>
             <section id="hawk-and-hare">
                 <h2>The Hawk and the Hare</h2>
@@ -265,20 +265,17 @@
             <section id="hare-not-an-idiot">
                 <h2>Hare: not an idiot</h2>
                 <p>The hare starts moving, 3m/s in one direction.</p>
-                <p>The hawk continuously reorients on the hare's as long as it's in view.</p>
+                <p>The hawk continuously reorients on the hare as long as he's in view.</p>
                 <br/>
                 <p>How long...</p>
             </section>
-            <section>
-                <h3>It is far easier to generate complexity than to deal with it</h3>
-            </section>
 
             <section id="complexity-vs-reasoning">
-                <h2>Complexity vs. Reasoning</h2>
+                <h2>Complexity vs Reasoning</h2>
                 <ul>
-                    <li>Modifying a system requires the ability to reason about it</li>
-                    <li>Complexity is the primary limitation on our ability to reason</li>
-                    <li>Our ability to create complexity <em>vastly</em> exceeds our capacity to reason about it</li>
+                    <li>Modifying a system requires the ability to reason about its behavior</li>
+                    <li>Complexity is the primary limit on our ability to reason</li>
+                    <li class="fragment">Our capacity to create complexity <em>vastly</em> exceeds our capacity to reason about it</li>
                 </ul>
                 <aside class="notes">
                     <ul>
@@ -291,98 +288,61 @@
                     </ul>
                 </aside>
             </section>
-            <section id="humans-vs-complexity">
-							<h2>Humans vs. Complexity</h2>
-							<svg id="hvc-chart"></svg>
-							<script type="text/javascript" charset="utf-8">
 
-								var values = [
-										{
-											name: "Bob",
-											value: 2
-										},
-										{
-											name: "Jamal",
-											value: 4
-										},
-										{
-											name: "Pooja",
-											value: 7
-										}
-									];
+						<section id="dijkstra-prerequisite">
+								<blockquote>
+										<p>Simplicity is prerequisite for reliability.</p>
+										<footer>Edsger W. Dijkstra</footer>
+								</blockquote>
+								<aside class="notes">
+										<ul>
+												<li>the great Dutch compsci Dijkstra</li>
+												<li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
+												<li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
+										</ul>
+								</aside>
+						</section>
 
-								var margin = {top: 15, right: 25, bottom: 40, left: 40},
-								  width = 600 - margin.left - margin.right,
-								  height = 400 - margin.top - margin.bottom;
+						<section id="priorities">
+							<h3>Simple and Easy are both important (and difficult)</h3>
+							<p>Easy gets the attention by default. Simple requires deliberate effort.</p><br/>
+							<!-- <p><em>Crucial question: </em>is this acceptable complexity?</p> -->
+							<aside class="notes">
+								<ul>
+									<li>this talk is worth giving because our collective tendency - especially in Drupal - is to tend towards ease. </li>
+									<li>Dijkstra again: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."</li>
+									<li>nevertheless, both of them are important. you can build the most elegant, simple system ever, but that does not guarantee it will be easy - and if nobody can get over the hump of learning it, does your system matter?</li>
+									<li>this is why we must ask the crucial question - whether the complexity is acceptable.</li>
+									<li>because complexity, once introduced, never goes away, whereas easy fades. complexity is carried into EVERY system that builds on yours. don't forget, it's intrinsic!</li>
+									<li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
+								</ul>
+							</aside>
+						</section>
 
-								var chart = d3.select("#hvc-chart")
-										.attr("width", width + margin.left + margin.right)
-										.attr("height", height + margin.top + margin.bottom)
-									.append("g")
-    								.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+						<section id="to-and-fro">
+							<h3>Simple things can usually be made Easy</h3><br/>
+							<h3>The reverse does not hold</h3>
+						</section>
 
-								var y = d3.scale.linear()
-										.range([height, 0])
-										.domain([0, d3.max(values.map(function(d) { return d.value } ))]);
-
-								var x = d3.scale.ordinal()
-										.rangeRoundBands([0, height], .5)
-										.domain(values.map(function(d) { return d.name }));
-
-								var xAxis = d3.svg.axis()
-										.scale(x)
-										.orient("bottom");
-
-								var yAxis = d3.svg.axis()
-										.scale(y)
-										.ticks(0)
-										.orient("left");
-
-								chart.append("g")
-							      .attr("class", "x axis")
-							      .attr("transform", "translate(0," + height + ")")
-							      .call(xAxis);
-
-							  chart.append("g")
-							      .attr("class", "y axis")
-							      .call(yAxis)
-							    .append("text")
-							      .attr("transform", "rotate(-90)")
-							      .attr("y", 6)
-							      .attr("dy", ".71em")
-							      .style("text-anchor", "end")
-										.text("Complexity");
-
-							  chart.selectAll(".bar")
-							      .data(values)
-							    .enter().append("rect")
-							      .attr("class", "bar")
-							      .attr("x", function(d) { return x(d.name); })
-							      .attr("width", x.rangeBand())
-							      .attr("y", function(d) { return y(d.value); })
-							      .attr("height", function(d) { return height - y(d.value); });
-
-							</script>
-            </section>
+						<section id="interface-vs-artifact">
+							<h2>Interface vs Artifact</h2>
+							<ul>
+								<li>Easy focuses on the experience of use<ul>
+									<li>Convenience for users</li>
+									<li>Replaceability of users</li>
+								</ul></li>
+								<li>Simple is concerned with the results of use<ul>
+									<li>Quality of code, correctness</li>
+									<li>Maintenance and future change</li>
+								</ul></li>
+							</ul>
+						</section>
         </section>
 
         <section>
-            <section id="dijkstra-prerequisite">
-                <blockquote>
-                    <p>Simplicity is prerequisite for reliability.</p>
-                    <footer>Edsger W. Dijkstra</footer>
-                </blockquote>
-                <aside class="notes">
-                    <ul>
-                        <li>the great Dutch compsci Dijkstra</li>
-                        <li>complex systems are unreliable. there are simply too many possible permutations to be able to anticipate their behaviors in all situations.</li>
-                        <li>this is an inherently human obsevation: as things become more complex, it becomes more difficult for us to reason about them, to understand and predict their behavior. this makes us less capable of ensuring their reliablity</li>
-                    </ul>
-                </aside>
-            </section>
 
           <section id="velocity-graph">
-            <h2><span class="bered">Simple</span> vs. <span class="beblue">Easy</span>: Project Velocity</h2>
+            <h2><span class="bered">Simple</span> vs <span class="beblue">Easy</span>: Project Velocity</h2>
             <script type="text/javascript" charset="utf-8">
               function v_easy (x) {
                 return 1/(Math.sqrt(x)) - 0.5;
@@ -417,13 +377,13 @@
             </script>
             <aside class="notes">
             <p>Easy is blue, Simple is red.</p>
-            <p>The graph is vs. time, which is really about the lifecycle of a given piece of software. Yay for wildly unscientific, unit-less graphs!</p>
+            <p>The graph is vs time, which is really about the lifecycle of a given piece of software. Yay for wildly unscientific, unit-less graphs!</p>
             <p>For basic projects, easy is better - complexity just doesn't enter the picture. But complexity grows over time, and there's an inflection point where simple software will allow your velocity to increase.</p>
             </aside>
           </section>
 
           <section id="coolness-graph">
-            <h2><span class="bered">Simple</span> vs. <span class="beblue">Easy</span>: Coolness</h2>
+            <h2><span class="bered">Simple</span> vs <span class="beblue">Easy</span>: Coolness</h2>
             <script type="text/javascript">
               // Generate some data.
               function f1 (x) {
@@ -467,81 +427,22 @@
             </aside>
           </section>
 
-					<section id="priorities">
-						<h3>Simple and Easy are both important (and difficult)</h3>
-						<p>Easy gets the attention by default. Simple requires deliberate effort.</p><br/>
-						<!-- <p><em>Crucial question: </em>is this acceptable complexity?</p> -->
-						<aside class="notes">
-							<ul>
-								<li>this talk is worth giving because our collective tendency - especially in Drupal - is to tend towards ease. </li>
-								<li>Dijkstra again: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."</li>
-								<li>nevertheless, both of them are important. you can build the most elegant, simple system ever, but that does not guarantee it will be easy - and if nobody can get over the hump of learning it, does your system matter?</li>
-								<li>this is why we must ask the crucial question - whether the complexity is acceptable.</li>
-								<li>because complexity, once introduced, never goes away, whereas easy fades. complexity is carried into EVERY system that builds on yours. don't forget, it's intrinsic!</li>
-								<li>it's just that certain kinds of complexity may not matter for the use case. that - and that alone - should be the basis of the answer to acceptability question.</li>
-							</ul>
-						</aside>
-					</section>
-
-					<section id="replication-transformation">
-						<p>Easy enables <strong>Replication</strong></p>
-						<p>Simple enables <strong>Transformation</strong></p>
-					</section>
-
-					<section id="to-and-fro">
-						<h3>Simple things can often be made easy</h3><br/>
-						<h3>The reverse does not hold</h3>
-					</section>
-
-          <section id="related-concepts">
-            <h3>Simplicity: the common thread</h3>
-            <ul>
-              <li>SOLID<ul>
-                <li>Interface Segregation</li>
-                <li>Dependency Inversion</li>
-              </ul></li>
-              <li>"The Unix Philosophy"</li>
-              <li>DRY - a red herring?</li>
-            </ul>
-            <aside class="notes">
-              <ul>
-                <li>SOLID
-                <ul>
-                  <li>Single responsibility: i listed single responsibility as a characteristic of simplicity. this is a "split-brain" idea.</li>
-                  <li>Interface segregation: the most crucial here, and perhaps a more concrete way of referring to "single responsibility". (it's sorta the abstract version of that). but the idea is the same: interfaces, as the descriptors of sets of behavior, should concern themselves with only ONE behavior.</li>
-                  <li>Dependency inversion: depend on abstractions, not concretions. Very basic technique: you complect with an abstraction - an interface - instead of a single thing. it allows swapping later.</li>
-                </ul>
-                </li>
-                <li>Unix - small pieces, loosely coupled</li>
-                <li>DRY, though, is tricky. sometimes, simple is more verbose than easy. often, in fact. trying to reuse code can easily result in you complecting two things together</li>
-              </ul>
-            </aside>
-          </section>
-        </section>
-
-					<!-- <section id="hoare-two-ways">
+					<section id="hoare-two-ways">
 						<blockquote>
 							<p>There are two ways of constructing a software design: One way is to make it so simple that there are <strong>obviously no deficiencies</strong>, and the other way is to make it so complicated that there are <strong>no obvious deficiencies</strong>.</p>
 							<footer>Tony Hoare</footer>
 						</blockquote>
-						<br/><blockquote>
-							I apologize for the length of this [program], I did not have time to make it shorter.
-							<footer>~Blaise Pascal (1657)</footer>
-						</blockquote>
+
 						<aside class="notes">
-						<p>i love this Hoare quote. it highlights two things:</p>
-						<ul>
-							<li>the previous slide's point: there comes a point at which software exceeds our capacity to reason about it</li>
-							<li>but also: one must aim for simplicity at the outset to achieve it</li>
-						</ul>
 						<p>Better quote: Programming languages on the whole are very much more complicated than they used to be: object orientation, inheritance, and other features are still not really being thought through from the point of view of a coherent and scientifically well-based discipline or a theory of correctness. My original postulate, which I have been pursuing as a scientist all my life, is that one uses the criteria of correctness as a means of converging on a decent programming language design—one which doesn’t set traps for its users, and ones in which the different components of the program correspond clearly to different components of its specification, so you can reason compositionally about it.</p>
 						<p>The Pascal quote is more subtle. it reminds us that achieving simplicity is not easy.</p>
 						</aside>
-					</section> -->
+					</section>
+				</section>
 
         <section>
           <section id="complexity-drupal" data-background="img/tendril.jpg">
-            <h2>Complexity in Drupal</h2>
+            <h2 style="color: white; font-size: 5em">Complexity in Drupal</h2>
             <aside class="notes">
             <ul>
               <li>ok, let's get a little more concrete, and talk about how all this actually applies to Drupal.</li>
@@ -583,7 +484,7 @@
                 <li>i hear this ALL THE TIME from Drupal folks. hell, i say it all the time. it's one of a litany of rationalizations we give for not designing tight systems.</li>
                 <li>in my view, it's a product of many factors - the fear that someone might have a use case we can't support, and the </li>
                 <li>there's also a deeper issue here: "it works" is not a good criteria. in fact, it's a terrible criteria.</li>
-                <li>this is ALWAYS possible. we need to shift the level, though. "tried to run it on a plate of spaghetti instead of a computer" vs. "gave the value 12, but the undocumented reality is that everything blows up if the value is greater than 10"</li>
+                <li>this is ALWAYS possible. we need to shift the level, though. "tried to run it on a plate of spaghetti instead of a computer" vs "gave the value 12, but the undocumented reality is that everything blows up if the value is greater than 10"</li>
                 <li>also - "it works" is not a design philosophy. it is something you accept - not something you aspire to.</li>
               </ul>
             </aside>
@@ -662,10 +563,11 @@ interface EntityInterface {
           <section id="alter-hooks">
             <h2>Alter Hooks</h2>
             <ul>
-              <li>Complects logic through shared state</li>
+              <li>Complects discrete logic through shared state</li>
               <li>Traditionally, an "escape hatch"</li>
               <li>In practice, often amounts to "runtime configuration"</li>
-              <li>Wreaks havoc on artifact stability</li>
+              <li>Wreaks havoc on artifact predictability - state space is too large</li>
+							<li>Renders "correctness" a delusion</li>
             </ul>
             <aside class="notes">
               <ul>
@@ -716,12 +618,15 @@ interface EntityInterface {
             <ul>
               <li>Far easier to do in core than contrib</li>
               <li>Try to build only on components you understand</li>
-              <li>Focus on swapping over altering</li>
+              <li>But, three words...</li>
             </ul>
             <aside class="notes">
               <p>harder to point out a particular thing to do.</p>
             </aside>
           </section>
+					<section id="three-words">
+						<h2>Swap. Don't alter.</h2>
+					</section>
         </section>
 
         <section>
@@ -730,7 +635,7 @@ interface EntityInterface {
             <ul>
               <li>Simple and Easy: very different, and both important</li>
               <li>Simplicity can enable Easy, but not vice-versa</li>
-              <li>Simple is generative; Easy is a dead end</li>
+              <li>Simple is diverse, generative; Easy is cloning, a dead end</li>
               <li>Drupal desperately needs more simple systems, and simplicity-oriented people</li>
             </ul>
           </section>
@@ -742,6 +647,9 @@ interface EntityInterface {
             <h2>Gauntlet, Thrown</h2>
             <img src="img/learning-curve-new.jpg" alt="The new Drupal learning curve"/>
             <p><em>Reducing complexity is the highest calling in Drupal</em></p>
+						<p>
+							<a href="https://bit.ly/kiss-sdboyer">https://bit.ly/kiss-sdboyer</a>
+						</p>
             <aside class="notes">
               <p>this is the final frontier that one can reach as a Drupaller. (almost) no new features - just refining, decomplecting, simplifying.</p>
             </aside>
